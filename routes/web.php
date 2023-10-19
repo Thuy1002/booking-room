@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('home', function(){ return view('client.home');});
+Route::get('dashboard', function(){ return view('Admin.dashboard');});

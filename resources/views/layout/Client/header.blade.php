@@ -31,11 +31,11 @@
             <!-- Dropdown Menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li  class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img style=" width: 35px;"
-                                src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="">
+                            <img style=" width: 35px;" src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+                                alt="">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
@@ -50,10 +50,27 @@
                             Phòng đã đặt
                         </a>
                         <div class="dropdown-menu" aria-labelledby="roomsDropdown">
-                            <a class="dropdown-item" href="#">Phòng 1</a>
-                            <a class="dropdown-item" href="#">Phòng 2</a>
+                            <a class="dropdown-item" href="#">
+                                <div class="row">
+                                    <div class="col-1">1</div>
+                                    <div class="col-4">Phòng 1</div>
+                                    <div class="col-3">
+                                        <img src="path_to_image_1.jpg" alt="Hình ảnh phòng 1" class="img-thumbnail">
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="row">
+                                    <div class="col-1">2</div>
+                                    <div class="col-4">Phòng 2</div>
+                                    <div class="col-3">
+                                        <img src="path_to_image_2.jpg" alt="Hình ảnh phòng 2" class="img-thumbnail">
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </li>
+
                 </ul>
 
             </div>
