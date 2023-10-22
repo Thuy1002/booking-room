@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -17,12 +19,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $email = fake()->safeEmail();
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => fake()->name(),
+            'email' => $email,
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'image' => '',
+            'number_phone' => fake()->phoneNumber(),
+            'password' => Hash::make(123456), // 12345678
             'remember_token' => Str::random(10),
+            'status' => Arr::random([1,2]),
+            'role' => Arr::random([1,2]),
+            'about_me' => fake()->text(100),
+            'address' => 'hà nội',
+            'gender' => Arr::random(['Nam', 'Nữ']),
         ];
     }
 
@@ -33,10 +43,8 @@ class UserFactory extends Factory
      */
     public function unverified()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
     }
 }
