@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class categori_service extends Model
 {
     use HasFactory;
+    protected $table = 'categori_servive';
     protected $filable = ['title','content'];
+
 }

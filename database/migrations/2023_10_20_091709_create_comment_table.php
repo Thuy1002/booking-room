@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('blog_id')->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('room_id');
-            $table->string('content');
+            $table->text('content');
             $table->integer('rate');
             $table->integer('status')->default(1);
             $table->string('image')->nullable();

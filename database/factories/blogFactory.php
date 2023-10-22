@@ -19,9 +19,9 @@ class blogFactory extends Factory
     {
         return [
             //
-            'user_id' =>rand(1,10),
+            'user_id' =>rand(1,5),
             'title' =>fake()->text(15),
-            'content' =>fake()->text(3000),
+            'content' =>fake()->text(5),
             'status' =>Arr::random([1,2]),
         ];
     }

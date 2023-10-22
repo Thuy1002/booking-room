@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('type_id');
             $table->string('image')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('price')->nullable();
             $table->integer('status')->default(0);
             $table->integer('capacity')->nullable();

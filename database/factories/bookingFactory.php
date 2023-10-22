@@ -26,7 +26,7 @@ class bookingFactory extends Factory
             'room_id'=>rand(1,10),
             'user_id' =>rand(1,5),
             'check_in_date' => fake()->dateTimeThisYear(''),
-            'check_out_date' => fake()->dateTimeBetween('now', 'now + 7'),
+            'check_out_date' => fake()->dateTimeBetween('now', $endDate),
             'booking_date'=>fake()->dateTimeThisYear(),
             'description' =>fake()->text(1000),
             'total_price' => Arr::random([200000, 500000, 1000000, 100000, 800000, 900000, 750000, 340000, 430000, 2000000]),

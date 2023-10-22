@@ -19,7 +19,7 @@ class categori_serviceFactory extends Factory
         return [
             //
             'title'=>fake()->text(15),
-            'title'=>fake()->text(500),
+            'content'=>fake()->text(500),
         ];
     }
 }

@@ -43,6 +43,6 @@ class UsersTableSeeder extends Seeder
                 'gender' => 'Nữ',
             ],
         ];
-        DB::table('user')->insert($users);
+        DB::table('users')->insert($users);
     }
 }

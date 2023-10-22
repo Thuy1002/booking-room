@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class service extends Model
 {
     use HasFactory;
+    protected $table = 'services';
     protected $fillable = ['room_id','categori_service_id','title','duration','price','status','image','description'];
 }

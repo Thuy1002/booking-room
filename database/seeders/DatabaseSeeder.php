@@ -23,13 +23,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        User::factory(5)->create();
-        blogFactory::factory(5)->create();
-        commentFactory::factory(5)->create();
-        bookingFactory::factory(5)->create();
-        roomsFactory::factory(5)->create();
-        serviceFactory::factory(5)->create();
-        typeFactory::factory(5)->create();
-        categori_serviceFactory::factory(5)->create();
+        $this->call(BaseSeeder::class);
     }
 }
