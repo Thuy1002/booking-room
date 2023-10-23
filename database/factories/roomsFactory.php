@@ -20,7 +20,7 @@ class roomsFactory extends Factory
     {
         return [
             'title'=>fake()->text(15),
-            'type_id' =>rand(1,10),
+            'type_id' =>rand(1,5),
             'image'=>'client/image/room4.jpg',
             'description' =>fake()->text(1000),
             'price' => Arr::random([200000, 500000, 1000000, 100000, 800000, 900000, 750000, 340000, 430000, 2000000]),

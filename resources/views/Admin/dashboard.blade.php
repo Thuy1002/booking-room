@@ -2,7 +2,7 @@
 @section('title')
     Dashboard
 @endsection
-@section('content'
+@section('content')
 <div class="row">
     <div class="col-xxl-12 order-2 order-xxl-1">
         <!--begin::Advance Table Widget 2-->

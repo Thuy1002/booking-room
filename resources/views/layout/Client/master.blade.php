@@ -19,8 +19,15 @@
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/responsive.css') }}">
 </head>
+@include('_alert')
 
 <body>
+    @if (session()->has('success'))
+        <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
+    @endif
     <!--================Header Area =================-->
     <header class="header_area">
         @include('layout.Client.header')
