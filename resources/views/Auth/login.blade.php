@@ -29,15 +29,22 @@
     <!--===============================================================================================-->
 </head>
 @include('_alert')
-<body style="background-color: #666666;">
 
+<body style="background-color: #666666;">
+    @if (session()->has('success'))
+        <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
+    @endif
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form method="POST" class="login100-form validate-form" action="{{ url('handel') }}" enctype="multipart/form-data">
+                <form method="POST" class="login100-form validate-form" action="{{ url('handel') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <span class="login100-form-title p-b-43">
-                       Đặng Nhập
+                        Đặng Nhập
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -57,7 +64,7 @@
                         <div class="contact100-form-checkbox">
                             <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                             <label class="label-checkbox100" for="ckb1">
-                               Lưu mật khẩu
+                                Lưu mật khẩu
                             </label>
                         </div>
 
@@ -77,7 +84,7 @@
 
                     <div class="text-center p-t-46 p-b-20">
                         <span class="txt2">
-                           Hoặc 
+                            Hoặc
                         </span>
                     </div>
 
@@ -93,8 +100,8 @@
                 </form>
 
                 {{-- <div class="login100-more" style="background-image: url('{{ asset('Auth/img1.jpg')}});"> --}}
-                <div class="login100-more" >
-                    <img style="width:100%;"  src="{{ asset('Auth/img2.jpg')}}" alt="">
+                <div class="login100-more">
+                    <img style="width:100%;" src="{{ asset('Auth/img2.jpg') }}" alt="">
                 </div>
             </div>
         </div>
@@ -120,7 +127,7 @@
     <script src="{{ asset('Auth/vendor/countdowntime/countdowntime.js') }}"></script>
     <!--===============================================================================================-->
     <script src="{{ asset('Auth/js/main.js') }}"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

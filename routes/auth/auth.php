@@ -22,7 +22,8 @@ Route::controller(HomeController::class)->middleware('check-user')->group(
     }
 );
 
-Route::prefix('/')->name('auth')->controller(AuthController::class)->group(function(){
+Route::prefix('/')->name('auth.')->controller(AuthController::class)->group(function(){
     Route::get('login', 'index')->name('login');
+    Route::get('logout', 'logout')->name('logout');
     Route::post('handel', 'handleLogin')->name('handleLogin');
 });

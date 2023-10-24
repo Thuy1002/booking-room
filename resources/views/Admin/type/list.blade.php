@@ -180,15 +180,16 @@
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->content }}</td>
                                         <td>
-                                            @if ($item->status == 1)
-                                                <span class="label label-inline label-light-success font-weight-bold">
-                                                    show
+                                            <div class="col-3">
+                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                    <label>
+                                                        <input id="change" type="checkbox"
+                                                            {{ $item->status == 1 ? 'checked' : '' }} name="status"
+                                                            data-url="{{ route('admin.types.change', $item->id) }}" />
+                                                        <span></span>
+                                                    </label>
                                                 </span>
-                                            @else
-                                                <span class="label label-inline label-light-danger font-weight-bold">
-                                                    Pending
-                                                </span>
-                                            @endif
+                                            </div>
                                         </td>
                                         <td style="display:flex ">
                                             <a class="" href=""><span
@@ -239,8 +240,6 @@
         <!--end::Entry-->
     </div>
     <style>
-        /* Định dạng các phần tử của phân trang */
-        /* CSS cho phân trang với tông trắng và xanh */
         .pagination {
             margin: 20px auto;
             display: flex;
@@ -293,4 +292,29 @@
             /* Màu trắng cho trang bị vô hiệu hóa */
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#change').on('change', function() {
+                var url = $(this).data('url');
+                var status = $(this).prop('checked') ? 1 : 2;
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        status: status,
+                    },
+                    success: function(response) {
+                        console.log(response
+                        .success); // In thông báo thành công hoặc thông tin trạng thái mới
+                    },
+                    error: function(error) {
+                        console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

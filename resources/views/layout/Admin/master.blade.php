@@ -47,19 +47,19 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--end::Head-->
 <!--begin::Body-->
 @include('_alert')
+@if (session()->has('success'))
+    <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
+@endif
+@if (session()->has('error'))
+    <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
+@endif
 
 <body id="kt_body"
     class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    @if (session()->has('success'))
-        <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
-    @endif
-    @if (session()->has('error'))
-        <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
-    @endif
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
         <a href="index.html">
-            <img alt="Logo" src="assets/media/logos/logo-dark.png" />
+            <img alt="Logo" src="{{asset('admin/assets/media/logos/logo-dark.png')}}" />
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -173,7 +173,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
         <!--begin::Header-->
         <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-            <h3 class="font-weight-bold m-0">User Profile
+            <h3 class="font-weight-bold m-0">Bản Thân
                 <small class="text-muted font-size-sm ml-2">12 messages</small>
             </h3>
             <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
@@ -190,9 +190,9 @@ License: You must have a valid license purchased only from themeforest(the above
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
-                    <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James
-                        Jones</a>
-                    <div class="text-muted mt-1">Application Developer</div>
+                    <a href="#"
+                        class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->name }}</a>
+                    <div class="text-muted mt-1">Giới tính: {{ $user->gender }}</div>
                     <div class="navi mt-2">
                         <a href="#" class="navi-item">
                             <span class="navi-link p-0 pb-2">
@@ -214,11 +214,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <!--end::Svg Icon-->
                                     </span>
                                 </span>
-                                <span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+                                <span class="navi-text text-muted text-hover-primary">{{ $user->email }}</span>
                             </span>
                         </a>
-                        <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign
-                            Out</a>
+                        <a href="{{ route('auth.logout') }}"
+                            class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -337,6 +337,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Page Vendors-->
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{ asset('admin/assets/js/pages/widgets.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

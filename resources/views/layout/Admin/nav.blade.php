@@ -54,7 +54,7 @@ data-menu-dropdown-timeout="500">
         </a>
     </li>
     <li class="menu-item" aria-haspopup="true">
-        <a target="_blank" href="{{route('admin.types.list')}}"
+        <a target="" href="{{route('admin.types.list')}}"
             class="menu-link">
             <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Group-folders.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -63,7 +63,7 @@ data-menu-dropdown-timeout="500">
                     <path d="M2.5,19 L19.5,19 C20.3284271,19 21,18.3284271 21,17.5 L21,6.5 C21,5.67157288 20.3284271,5 19.5,5 L9,5 L6.43933983,2.43933983 C6.15803526,2.15803526 5.77650439,2 5.37867966,2 L2.5,2 C1.67157288,2 1,2.67157288 1,3.5 L1,17.5 C1,18.3284271 1.67157288,19 2.5,19 Z" fill="#000000"/>
                 </g>
             </svg><!--end::Svg Icon--></span>
-            <span class="menu-text">Type Rooms</span>
+            <span style="margin-left:10px;" class="menu-text">Danh Sách Loại Phòng</span>
         </a>
     </li>
 </ul>
