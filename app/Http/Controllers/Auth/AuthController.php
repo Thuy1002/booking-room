@@ -21,7 +21,8 @@ class AuthController extends Controller
         if (
             Auth::guard('web')->attempt([
                 'email' => $request->email,
-                'password' => $request->password
+                'password' => $request->password,
+                'status' => 2
             ])
         ) {
             if (Session::get('backUrl')) {
@@ -29,9 +30,20 @@ class AuthController extends Controller
                 Session::forget('backUrl');
                 return redirect($url)->with('success', 'bạn đăng nhập thành công');
             }
-            return redirect()->route('home')->with('success', 'bạn đăng nhập thành công');
+            return redirect()->route('client')->with('success', 'bạn đăng nhập thành công');
+        } elseif (Auth::guard('web')->attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+            'status' => 1
+        ])) {
+            return redirect()->route('admin.home')->with('success', 'Đăng nhập thành công');
         } else {
-            return redirect()->route('login')->with('failed', 'bạn đăng nhập thất bại');
+            return redirect()->route('auth.login')->with('failed', 'đăng nhập thất bại');
+            // return redirect('login')->with('failed', 'đăng nhập thất bại !');
         }
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('auth.login');
     }
 }

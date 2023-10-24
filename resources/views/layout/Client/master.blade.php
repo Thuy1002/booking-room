@@ -53,6 +53,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('client/js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('client/js/popper.js') }}"></script>
     <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
@@ -65,6 +66,7 @@
     <script src="{{ asset('client/js/stellar.js') }}"></script>
     <script src="{{ asset('client/vendors/lightbox/simpleLightbox.min.js') }}"></script>
     <script src="{{ asset('client/js/custom.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

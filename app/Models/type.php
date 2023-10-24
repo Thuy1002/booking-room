@@ -10,4 +10,9 @@ class type extends Model
     use HasFactory;
     protected $table = 'types';
     protected $fillable = ['title','content','status'];
+
+
+    public function room(){
+       return  $this->hasMany(rooms::class);
+    }
 }

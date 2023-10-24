@@ -10,4 +10,9 @@ class rooms extends Model
     use HasFactory;
     protected $table = 'rooms';
     protected $fillable = ['title','type_id','image','description','price','status','capacity'];
+
+    public function type()
+    {
+        return $this->belongsTo(type::class);
+    }
 }

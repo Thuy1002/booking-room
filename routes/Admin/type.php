@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/types')->name('admin.types')->controller(TypeController::class)->group( function(){
+Route::prefix('/admin/types')->name('admin.types.')->middleware('check-admin')->controller(TypeController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::post('store','store')->name('store');
+     Route::post('change/{id}','updateStatus')->name('change');
      Route::put('update/{id}','update')->name('update');
-     Route::get('delete/{id}','delete')->name('delete');
+     Route::get('delete/{id}','delet')->name('delete');
 });
 
