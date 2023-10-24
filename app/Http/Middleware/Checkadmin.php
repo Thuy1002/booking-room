@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckClient
+class Checkadmin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class CheckClient
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->status == 1) {
+        if (auth()->user()->status == 2) {
             return redirect()->back()->with('failed', 'Bạn không có quyền truy cập');
         }
-        
         return $next($request);
     }
 }
