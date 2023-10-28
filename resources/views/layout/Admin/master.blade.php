@@ -42,7 +42,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Layout Themes-->
     <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
 
-
+<style>
+    .swal2-icon.swal2-success.swal2-icon-show{
+        margin: auto;
+    }
+</style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->

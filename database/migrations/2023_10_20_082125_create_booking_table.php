@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('payment_status')->default(1);
             $table->integer('children')->nullable();
             $table->integer('total_price')->nullable();
+            $table->integer('total_price_curr')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

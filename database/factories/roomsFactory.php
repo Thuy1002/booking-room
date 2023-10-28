@@ -19,10 +19,13 @@ class roomsFactory extends Factory
     public function definition()
     {
         return [
-            'title'=>fake()->text(15),
+            'title'=>fake()->text(10),
+            'imagfacilitiese'=>fake()->text(10),
+            'view'=>fake()->text(10),
+            'floor'=>fake()->text(10),
             'type_id' =>rand(1,5),
             'image'=>'client/image/room4.jpg',
-            'description' =>fake()->text(1000),
+            'description' =>fake()->text(300),
             'price' => Arr::random([200000, 500000, 1000000, 100000, 800000, 900000, 750000, 340000, 430000, 2000000]),
             'status' =>Arr::random([1,2,3,4]),
             'capacity' =>Arr::random([1,2,3,4,5,6]),

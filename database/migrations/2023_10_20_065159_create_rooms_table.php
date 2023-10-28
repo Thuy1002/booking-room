@@ -22,6 +22,9 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->integer('status')->default(0);
             $table->integer('capacity')->nullable();
+            $table->string('imagfacilitiese')->nullable();//tiện nghi phòng
+            $table->string('view')->nullable(); // hướng phòng
+            $table->string('floor')->nullable();// tầng phòng
             $table->timestamps();
         });
     }

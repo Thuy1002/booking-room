@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/types')->name('admin.types.')->middleware('check-admin')->controller(TypeController::class)->group( function(){
+Route::prefix('/admin/rooms')->name('admin.rooms.')->middleware('check-admin')->controller(RoomController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');

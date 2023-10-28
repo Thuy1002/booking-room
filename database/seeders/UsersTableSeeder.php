@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
         // 'name' => fake()->name(),
         $users = [
             [
-                'name' => fake()->name(),
-                'email' => 'dangthanhthuy@example.com',
+                'name' => 'Mr.Thuy',
+                'email' => 'thuy1002dangthanh@gmail.com',
                 'password' => Hash::make(123456),
                 'image' => '',
                 'role' => 1,//admin
@@ -31,8 +31,8 @@ class UsersTableSeeder extends Seeder
                 'gender' => 'Nam',
             ],
             [
-                'name' => fake()->name(),
-                'email' => 'thuy2002@example.com',
+                'name' => 'Mr.Thuy',
+                'email' => 'dangthanhthuy022002@gmail.com.com',
                 'password' => Hash::make(123456),
                 'image' => '',
                 'role' => 2,//client

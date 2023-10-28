@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(HomeController::class)->middleware('check-user')->group(
+Route::controller(HomeController::class)->group(
     function () {
         Route::get('/','index')->name('client');
     }

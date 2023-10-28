@@ -6,11 +6,11 @@
     <div style="width: 50%;margin: auto; margin-top: -50px;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
-                Tên loại phòng
+               Chỉnh sửa nội dung
             </h3>
         </div>
         <!--begin::Form-->
-        <form class="form" action="{{ route('admin.types.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="form" action="{{ route('admin.types.update',$typ->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group form-group-last">
@@ -23,11 +23,11 @@
                 </div>
                 <div class="form-group">
                     <label>Tên loại phòng</label>
-                    <input type="text" name="title"  class="form-control form-control-solid" placeholder="" />
+                    <input type="text" name="title" value="{{$typ->title}}" class="form-control form-control-solid" placeholder="" />
                 </div>
                 <div class="form-group">
                     <label for="exampleTextarea">Mô tả</label>
-                    <textarea name="content" class="form-control form-control-solid" rows="3"></textarea>
+                    <textarea name="content"  class="form-control form-control-solid" rows="3">{{$typ->content}}"</textarea>
                 </div>
             </div>
             <div class="card-footer">

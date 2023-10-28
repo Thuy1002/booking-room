@@ -1,6 +1,6 @@
 @extends('layout.Admin.master')
 @section('title')
-    Danh Sách Loại Phòng
+    Danh Sách Phòng
 @endsection
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -93,7 +93,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="{{ route('admin.types.add') }}" class="btn btn-primary font-weight-bolder">
+                            <a href="" class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -165,32 +165,59 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">title</th>
-                                    <th scope="col">content</th>
+                                    <th scope="col">Room</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">capacity</th>
+                                    <th scope="col">Type room</th>
+                                    <th scope="col">Floor</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">imagfacilitiese</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="product-list">
-                                @foreach ($typ as $item)
+                                @foreach ($rooms as $item)
                                     <tr>
                                         <th scope="row">{{ $item->id }}</th>
-                                        <td>{{ $item->title }}</td>
-                                        <td> {{ $item->content }}</td>
-                                        <td>
-                                            <div class="col-3">
-                                                <span class="switch switch-outline switch-icon switch-primary">
-                                                    <label>
-                                                        <input class="doikieu" type="checkbox"
-                                                            {{ $item->status == 1 ? 'checked' : '' }}
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.types.change', $item->id) }}"/>
-                                                        <span></span>
-                                                    </label>
-                                                </span>
-                                            </div>
-                                        </td>
+                                        <td scope="row">{{ $item->title }}</td>
+                                        <th scope="row"> <img src="{{ $item->image }}" alt=""></th>
+                                        <td scope="row">{{ number_format($item->price) }}</td>
+                                        <td scope="row"> {{ $item->capacity }}</td>
+                                        <td scope="row"> {{ $item->type->title }}</td>
+                                        <td scope="row">Tầng {{ $item->floor }}</td>
+                                        <td scope="row"> {{ $item->view }}</td>
+                                        <td class="description" scope="row"> {{ $item->description }}</td>
+                                        <td scope="row"> {{ $item->imagfacilitiese }}</td>
+                                        @if ($item->status == 2)
+                                            <td data-field="Status" data-autohide-disabled="false" aria-label="3"
+                                                class="datatable-cell"><span style="width: 126px;"><span
+                                                        class="label font-weight-bold label-lg label-light-primary label-inline">Chống</span></span>
+                                            </td>
+                                        @elseif ($item->status == 1)
+                                            <td data-field="Status" data-autohide-disabled="false" aria-label="6"
+                                                class="datatable-cell"><span style="width: 126px;"><span
+                                                        class="label font-weight-bold label-lg  label-light-info  label-inline">Đã
+                                                        đặt</span></span>
+                                            </td>
+                                        @elseif ($item->status == 3)
+                                            <td data-field="Status" data-autohide-disabled="false" aria-label="5"
+                                                class="datatable-cell"><span style="width: 126px;"><span
+                                                        class="label font-weight-bold label-lg label-light-dangerlabel-inline">Chưa
+                                                        thanh toán</span></span>
+                                            </td>
+                                        @else
+                                            <td data-field="Status" data-autohide-disabled="false" aria-label="1"
+                                                class="datatable-cell"><span style="width: 146px;"><span
+                                                        class="label font-weight-bold label-lg label-light-warning label-inline">Đã
+                                                        hủy</span></span>
+                                            </td>
+                                        @endif
+
                                         <td style="display:flex ">
-                                            <a href="{{ route('admin.types.update', $item->id) }}"
+                                            <a href=""
                                                 class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2"
                                                 title="Edit details">
                                                 <span class="svg-icon svg-icon-md">
@@ -211,7 +238,7 @@
                                                     </svg>
                                                 </span>
                                             </a>
-                                            <a onclick="if (confirm('Bạn có muốn xóa không ?')) { window.location.href = '{{ route('admin.types.delete', $item->id) }}'; }"
+                                            <a onclick="if (confirm('Bạn có muốn xóa không ?')) { window.location.href = ''; }"
                                                 class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"
                                                 title="Delete">
                                                 <span class="svg-icon svg-icon-md">
@@ -237,7 +264,7 @@
                             </tbody>
                         </table>
                         <div class="pagination">
-                            {{ $typ->links('Admin.paginate') }}
+                            {{ $rooms->links('Admin.paginate') }}
                         </div>
 
                     </div>
@@ -303,58 +330,80 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // var maxTitleLength = 5; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn cho tiêu đề cột
+
+        // // Lặp qua tất cả các tiêu đề cột và cắt chúng nếu quá dài
+        // document.querySelectorAll('.description').forEach(function(th) {
+        //     var text = th.textContent;
+        //     if (text.length > maxTitleLength) {
+        //         th.textContent = text.substring(0, maxTitleLength) + '...';
+        //     }
+        // });
+
+        var maxContentLength = 50; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn
+        var descriptionTds = document.getElementsByClassName("description");
+
+        for (var i = 0; i < descriptionTds.length; i++) {
+            var descriptionTd = descriptionTds[i];
+            var content = descriptionTd.textContent;
+
+            if (content.length > maxContentLength) {
+                descriptionTd.textContent = content.substring(0, maxContentLength) + '...';
+            }
+        };
+
         $(document).ready(function() {
             $('.doikieu').on('change', function() {
-                var status = $(this).prop('checked') ? 1 : 2;
-                var id = $(this).data('id');
-                var url = $(this).data('url');
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        status: status,
-                        id: id
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: response.success,
-                        })
-                        console.log(response
-                            .success); // In thông báo thành công hoặc thông tin trạng thái mới
-                    },
-                    error: function(error) {
-                        console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
-                    }
-                });
-            }),
-            $('.slect-status').change(function() {
-                var stt = $(this).val();
+                    var status = $(this).prop('checked') ? 1 : 2;
+                    var id = $(this).data('id');
+                    var url = $(this).data('url');
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            status: status,
+                            id: id
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: response.success,
+                            })
+                            console.log(response
+                                .success); // In thông báo thành công hoặc thông tin trạng thái mới
+                        },
+                        error: function(error) {
+                            console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
+                        }
+                    });
+                }),
+                $('.slect-status').change(function() {
+                    var stt = $(this).val();
 
-                $.ajax({
-                    url: '{{ route('admin.types.fillersStt') }}',
-                    type: 'GET',
-                    data: {
-                        status: stt
-                    },
-                    success: function(data) {
-                        var htm = $('#product-list').empty();
-                        htm.empty();
-                        $.each(data, function(index, item) {
-                            var newrow = $('<tr>');
-                            newrow.append($('<td>').text(item.title));
+                    $.ajax({
+                        url: '{{ route('admin.types.fillersStt') }}',
+                        type: 'GET',
+                        data: {
+                            status: stt
+                        },
+                        success: function(data) {
+                            var htm = $('#product-list').empty();
+                            htm.empty();
+                            $.each(data, function(index, item) {
+                                var newrow = $('<tr>');
+                                newrow.append($('<td>').text(item.title));
                                 htm.append(newrow);
-                        });
+                            });
 
-                        console.log(data);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
                 });
-            });
         });
     </script>
 @endsection

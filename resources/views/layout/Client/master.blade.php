@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/responsive.css') }}">
 </head>
+<style>
+    .swal2-icon.swal2-success.swal2-icon-show {
+        margin: auto;
+    }
+</style>
 @include('_alert')
 
 <body>

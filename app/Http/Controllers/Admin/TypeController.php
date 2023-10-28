@@ -29,26 +29,67 @@ class TypeController extends Controller
     //         return back()-> with('success','Thay đổi trạng thái thành công');
     //      }
     // }
+
     public function updateStatus(Request $request, $id)
     {
         $item = type::find($id);
-        // dd($item->room());
-        if (!$item) {
-            return response()->json(['failed' => 'Sản phẩm không tồn tại'], 404);
-        }
         if ($item->status == 1) {
             $item->update(['status' => 2]);
         } elseif ($item->status == 2) {
             $item->update(['status' => 1]);
         }
-        return response()->json(['success' => 'Trạng thái thay đổi thành công']);
+        return response()->json(['success' => 'Cập nhật trạng thái thành công']);
     }
-    public function delet($id){
+
+
+    public function delet($id)
+    {
         $item = type::find($id);
         $item->room()->delete();
         $item->delete();
-        return back()->with('success','Xóa thành công');
+        return back()->with('success', 'Xóa thành công');
     }
-
-
+    public function add(Request $request)
+    {
+        $user = Auth::user();
+        return view('Admin.type.add', compact('user'));
+    }
+    public function store(Request $request)
+    {
+        $typ = new type();
+        $typ->title = $request->title;
+        $typ->content = $request->content;
+        $typ->save();
+        //  dd($typ);
+        return redirect()->route('admin.types.list')->with('success', 'thêm mới thành công');
+    }
+    public function update(Request $request, $id)
+    {
+        $user = Auth::user();
+        if ($request->isMethod('post')) {
+            $typ = type::find($id);
+            $update = $request->only('title', 'content');
+            $typ->update($update);
+            return redirect()->route('admin.types.list', compact('user', 'typ'))->with('success', 'Sửa thành công');
+        } else {
+            $typ = type::find($id);
+            return view('Admin.type.update', compact('user', 'typ'));
+        }
+    }
+    public function fillersStt(Request $request)
+    {
+        $status = $request->input('status');
+        $query = type::query();
+        dd($query);
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+        else{
+            if($status==0){
+                $query->get();
+            }
+        }
+        $typ = $query->get();
+        return  response()->json($typ);
+    }
 }

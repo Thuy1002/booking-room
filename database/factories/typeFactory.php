@@ -18,7 +18,7 @@ class typeFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->text(15),
+            'title' => fake()->text(10),
             'status' => Arr::random([1,2]),
             'content' =>fake()->text(200),
         ];
