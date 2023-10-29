@@ -3,14 +3,13 @@
     Danh Sách Phòng
 @endsection
 @section('content')
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div style="margin-top: -50px;" class=" content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
         <!--end::Subheader-->
         <!--begin::Entry-->
         <div class="d-flex flex-column-fluid">
             <!--begin::Container-->
-            <div class="container">
-
+            <div class="">
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
@@ -93,7 +92,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="" class="btn btn-primary font-weight-bolder">
+                            <a href="{{route('admin.rooms.add')}}" class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
