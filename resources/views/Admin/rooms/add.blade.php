@@ -1,6 +1,6 @@
 @extends('layout.Admin.master')
 @section('title')
-    Chỉnh sửa
+    Thêm mới phòng
 @endsection
 @section('content')
     <div style="margin: auto;width: 70%;margin-top: -50px;" class="card card-custom">
@@ -10,7 +10,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{route('admin.rooms.store')}}" enctype="multipart/form-data" method="post">
+        <form action="{{ route('admin.rooms.store') }}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="card-body">
                 <div class="form-group mb-8">
@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="example-search-input" class="col-2 col-form-label">Tầng</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" type="search" name="floor"
+                        <input style="    width: 70%;" class="form-control" type="number" name="floor"
                             id="example-search-input" />
                     </div>
                 </div>
@@ -64,10 +64,10 @@
                                 <div>
                                     <select name="type_id" class="form-control ">
                                         <option selected>All</option>
-                                        @foreach ($room as $item)
-                                        <option>{{$item->type->title}}</option>
+                                        @foreach ($typ as $item)
+                                            <option value="{{$item->id}}">{{ $item->title }}</option>
                                         @endforeach
-                                      </select>
+                                    </select>
                                 </div>
                                 <div class="d-md-none mb-2"></div>
                             </div>
@@ -81,6 +81,20 @@
 
                 </div>
                 <div class="form-group row">
+                    <label class="col-3 col-form-label">Dịch vụ</label>
+                    <div class="col-9 col-form-label">
+                        <div class="checkbox-inline">
+                            @foreach ($servi as $item)
+                                <label for="{{ $item->id }}" class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
+                                    <input id="{{ $item->id }}" type="checkbox" value="{{$item->id}}"  name="service_id[]"/>
+                                    <span></span>
+                                    {{ $item->title }}
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-2 col-form-label" for="example-number-input">Mô tả
                         <span class="text-danger">*</span></label>
                     <div class="col-10">
@@ -91,7 +105,7 @@
                     <label for="example-number-input" class="col-2 col-form-label">Ảnh mô tả</label>
                     <div class="col-10">
                         <input style="width: 70%;" class="form-control" type="file" name="description_img"
-                            id="example-number-input" />
+                            id="" />
                     </div>
                 </div>
                 <div class="form-group row">

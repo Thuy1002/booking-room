@@ -92,7 +92,7 @@
                             </div>
                             <!--end::Dropdown-->
                             <!--begin::Button-->
-                            <a href="{{ route('admin.rooms.add') }}" class="btn btn-primary font-weight-bolder">
+                            <a href="{{route('admin.rooms.add')}}" class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -110,7 +110,6 @@
                             <!--end::Button-->
                         </div>
                     </div>
-
                     <div class="card-body">
                         <!--begin: Search Form-->
                         <!--begin::Search Form-->
@@ -184,14 +183,13 @@
                                     <tr>
                                         <th scope="row">{{ $item->id }}</th>
                                         <td scope="row">{{ $item->title }}</td>
-                                        <th scope="row"> <img style="height: 270px;width:260px;border-radius:10px"
-                                                src="{{ asset('storage/' . $item->image) }}" alt=""></th>
+                                        <th scope="row"> <img src="{{ $item->image }}" alt=""></th>
                                         <td scope="row">{{ number_format($item->price) }}</td>
                                         <td scope="row"> {{ $item->capacity }}</td>
                                         <td scope="row"> {{ $item->type->title }}</td>
                                         <td scope="row">Tầng {{ $item->floor }}</td>
                                         <td scope="row"> {{ $item->view }}</td>
-                                        <td scope="row">{{ $item->service->title ?? 'Giá trị mặc định' }}</td>
+                                        <td scope="row"> {{ $item->s }}</td>
                                         <td class="description" scope="row"> {{ $item->description }}</td>
                                         <td scope="row"> {{ $item->imagfacilitiese }}</td>
                                         @if ($item->status == 2)
@@ -208,7 +206,7 @@
                                         @elseif ($item->status == 3)
                                             <td data-field="Status" data-autohide-disabled="false" aria-label="5"
                                                 class="datatable-cell"><span style="width: 126px;"><span
-                                                        class="label font-weight-bold label-lg label-light-danger label-inline">Chưa
+                                                        class="label font-weight-bold label-lg label-light-dangerlabel-inline">Chưa
                                                         thanh toán</span></span>
                                             </td>
                                         @else

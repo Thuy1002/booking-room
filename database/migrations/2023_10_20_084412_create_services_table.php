@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->integer('room_id');
+            $table->integer('room_id')->nullable();
             $table->integer('categori_service_id');
             $table->string('title');
             $table->string('duration')->nullable();  // mô tả thời lượng dịch vụ

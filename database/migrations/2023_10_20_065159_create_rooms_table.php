@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type_id');
+            $table->integer('type_id');
+            $table->string('service')->nullable();
             $table->string('image')->nullable();
             $table->string('description_img')->nullable();
             $table->text('description')->nullable();
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->integer('capacity')->nullable();
             $table->string('imagfacilitiese')->nullable();//tiện nghi phòng
             $table->string('view')->nullable(); // hướng phòng
-            $table->string('floor')->nullable();// tầng phòng
+            $table->integer('floor')->nullable();// tầng phòng
             $table->timestamps();
         });
     }
