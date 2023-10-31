@@ -10,7 +10,7 @@
             </h3>
         </div>
         <!--begin::Form-->
-        <form action="{{ route('admin.rooms.update',$roo->id) }}" enctype="multipart/form-data" method="post">
+        <form action="{{ route('admin.rooms.update', $roo->id) }}" enctype="multipart/form-data" method="post">
             @csrf
             {{-- @dd($roo) --}}
             <div class="card-body">
@@ -25,35 +25,36 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Tên phòng</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" value="{{$roo->title}}" name="title" type="text"
-                            id="example-text-input" />
+                        <input style="    width: 70%;" class="form-control" value="{{ $roo->title }}" name="title"
+                            type="text" id="example-text-input" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-search-input" class="col-2 col-form-label">Tầng</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" value="{{$roo->floor}}" type="number" name="floor"
-                            id="example-search-input" />
+                        <input style="    width: 70%;" class="form-control" value="{{ $roo->floor }}" type="number"
+                            name="floor" id="example-search-input" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-email-input" class="col-2 col-form-label">View</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" value="{{$roo->view}}" name="view" type="text"
-                            id="example-email-input" />
+                        <input style="    width: 70%;" class="form-control" value="{{ $roo->view }}" name="view"
+                            type="text" id="example-email-input" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-url-input" class="col-2 col-form-label">Tiện nghi</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" value="{{$roo->imagfacilitiese}}" name="imagfacilitiese" id="example-url-input" />
+                        <input style="    width: 70%;" class="form-control" value="{{ $roo->imagfacilitiese }}"
+                            name="imagfacilitiese" id="example-url-input" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-url-input" class="col-2 col-form-label">Giới hạn người ở</label>
                     <div class="col-10">
-                        <input style="    width: 70%;" class="form-control" value="{{$roo->capacity}}" name="capacity" type="number"
-                            id="example-url-input" />
+                        <input style="    width: 70%;" class="form-control" value="{{ $roo->capacity }}" name="capacity"
+                            type="number" id="example-url-input" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -64,9 +65,9 @@
                                 <label>Loại phòng:</label>
                                 <div>
                                     <select name="type_id" class="form-control ">
-                                        <option value="{{$roo->type->title}}" selected>{{$roo->type->title}}</option>
+                                        <option value="{{ $roo->type->id }}" selected>{{ $roo->type->title }}</option>
                                         @foreach ($type as $item)
-                                            <option value="{{$item->id}}">{{ $item->title }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -74,7 +75,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label>Giá:</label>
-                                <input type="number" value="{{$roo->price}}" class="form-control" name="price" />
+                                <input type="number" value="{{ $roo->price }}" class="form-control" name="price" />
                                 <div class="d-md-none mb-2"></div>
                             </div>
                         </div>
@@ -85,15 +86,25 @@
                     <label class="col-3 col-form-label">Dịch vụ</label>
                     <div class="col-9 col-form-label">
                         <div class="checkbox-inline">
-                            
-                            {{-- @foreach ($roo as $item)
-                                <label for="{{ $item->service->id }}" class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
-                                    <input id="{{ $item->service->id }}" type="checkbox" value="{{$item->service->id}}"  name="service_id[]"/>
+                            @foreach ($roo->services as $item)
+                                <label for="{{ $item->id }}"
+                                    class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
+                                    <input id="{{ $item->id }}" checked type="checkbox" value="{{ $item->id }}"
+                                        name="service_id[]" />
                                     <span></span>
-                                    {{ $item->service->title }}
+                                    {{ $item->title }}
                                 </label>
-                            @endforeach --}}
-                          
+                            @endforeach
+                            @foreach ($servi as $item)
+                                <label for="{{ $item->id }}"
+                                    class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
+                                    <input id="{{ $item->id }}" type="checkbox" value="{{ $item->id }}"
+                                        name="service_id[]" />
+                                    <span></span>
+                                    {{ $item->title }}
+                                </label>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -101,22 +112,26 @@
                     <label class="col-2 col-form-label" for="example-number-input">Mô tả
                         <span class="text-danger">*</span></label>
                     <div class="col-10">
-                        <textarea style="width: 70%;" class=" form-control" value="{{$roo->description}}" name="description" id="exampleTextarea" rows="3">{{$roo->description}}</textarea>
+                        <textarea style="width: 70%;" class=" form-control" value="{{ $roo->description }}" name="description"
+                            id="exampleTextarea" rows="3">{{ $roo->description }}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-number-input" class="col-2 col-form-label">Ảnh mô tả</label>
                     <div class="col-10">
-                        <input style="width: 70%;" class="form-control" value="{{$roo->description_img}}" type="file" name="description_img"
-                            id="" />
+                        <input style="width: 70%;" class="form-control" type="file" name="description_img"  id="" />
+                        <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->description_img) }}" alt="">
                     </div>
+                  
                 </div>
                 <div class="form-group row">
                     <label for="example-number-input" class="col-2 col-form-label">Ảnh</label>
                     <div class="col-10">
-                        <input style="width: 70%;" class="form-control" value="{{$roo->image}}" type="file" name="image"
-                            id="example-number-input" />
+                        <input style="width: 70%;" class="form-control" 
+                            type="file" name="image" id="example-number-input" />
+                            <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->image) }}" alt="">
                     </div>
+                  
                 </div>
 
             </div>

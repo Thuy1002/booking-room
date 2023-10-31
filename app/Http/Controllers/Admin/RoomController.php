@@ -18,7 +18,7 @@ class RoomController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $rooms = rooms::with(['type', 'service'])->orderBy('created_at', 'desc')->paginate(8);
+        $rooms = rooms::with(['type', 'services',])->orderBy('created_at', 'desc')->paginate(8);
         return view('Admin.rooms.list', compact('rooms', 'user'));
     }
     public function add()
@@ -27,7 +27,7 @@ class RoomController extends Controller
         $user = Auth::user();
         $typ = type::all();
         //      dd($room);
-        return view('Admin.rooms.add', compact('user', 'typ','servi'));
+        return view('Admin.rooms.add', compact('user', 'typ', 'servi'));
     }
     public function store(Request $request)
     {
@@ -47,15 +47,16 @@ class RoomController extends Controller
         $roo['image'] = $img;
         $roo['description_img'] = $img_des;
         $room =  rooms::create($roo);
-       $room->service()->attach($selectedServices);
-    
+        $room->services()->attach($selectedServices);
+
         return redirect()->route('admin.rooms.list')->with('success', 'thêm mới thành công');
     }
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $type = type::all();
         $user = Auth::user();
         $servi = service::all();
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             $roo = rooms::find($id);
             $img = $request->file('image')->store('images', 'public'); // Lưu vào thư mục "storage/app/public/images";
             $img_des = $request->file('description_img')->store('images', 'public');
@@ -73,14 +74,34 @@ class RoomController extends Controller
             $update['image'] = $img;
             $update['description_img'] = $img_des;
             $roo->update($update);
-            $roo->service()->attach($selectedServices);
-            return redirect()->route('admin.rooms.list')->with('success','Sửa thành công');
+            $roo->services()->sync($selectedServices);
+            return redirect()->route('admin.rooms.list')->with('success', 'Sửa thành công');
+        } else {
+            $roo = rooms::with(['type', 'services'])->find($id);
+            //   dd($roo->refresh());
+            return view('Admin.rooms.update', compact('user', 'roo', 'type', 'servi'));
         }
-        else{
-            $roo = rooms::with(['type','service'])->find($id);
-            
-            return view('Admin.rooms.update',compact('user','roo','type','servi'));
-        }
-
     }
+    public function updateStatus(Request $request, $id)
+    {
+        $item = rooms::find($id);
+        $item->status = $request->input('status');
+        $item->save();
+        return response()->json(['success' => 'Cập nhật trạng thái thành công']);
+    }
+    
+   public function delet($id)
+   {
+       $item = rooms::find($id);
+       $item->delete();
+       return back()->with('success', 'Xóa thành công');
+   }
 }
+ // if ($item->status == 1) {
+        //     $item->update(['status' => 2]);
+        // } elseif ($item->status == 2) {
+        //     $item->update(['status' => 1]);
+        // }
+        // else{
+        //     $item->update(['status' => 3]);
+        // }

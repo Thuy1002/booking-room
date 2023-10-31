@@ -5,13 +5,13 @@
 @section('content')
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
-        
-        <div class="container">
 
+        <div class="container">
             {{-- start new-item --}}
-            <div style="display: flex;margin-bottom:20px ;justify-content: space-between;" class=" card-header flex-wrap border-0 pt-6 pb-0">
+            <div style="display: flex;margin-bottom:20px ;justify-content: space-between;"
+                class=" card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">ROYALL HOTEL 
+                    <h3 class="card-label">ROYALL HOTEL
                         <span class="text-muted pt-2 font-size-sm d-block">Nơi bắt đầu của một kỳ nghỉ đẹp</span>
                     </h3>
                 </div>
@@ -40,8 +40,7 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                             <!--begin::Navigation-->
                             <ul class="navi flex-column navi-hover py-2">
-                                <li
-                                    class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
+                                <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
                                     Choose an option:</li>
                                 <li class="navi-item">
                                     <a href="#" class="navi-link">
@@ -90,7 +89,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="{{route('admin.rooms.add')}}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ route('admin.rooms.add') }}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -164,8 +163,7 @@
                             <!--begin::Body-->
                             <div class="ribbon ribbon-clip ribbon-left">
                                 <div class="ribbon-target" style="top: 12px;">
-                                    <span
-                                        class="ribbon-inner bg-success"></span>{{ number_format($item->price) }}{{ number_format($item->price) }}.
+                                    <span class="ribbon-inner bg-success"></span>{{ number_format($item->price) }}.
                                     VNĐ
                                 </div>
                             </div>
@@ -191,11 +189,13 @@
                                                 <li class="navi-item">
                                                     <a href="#" class="navi-link">
                                                         <span class="navi-text">
-                                                            <img style="width:20%;" src="{{ asset('storage/' . $item->image) }}" alt="">
+                                                            <img style="width:20%;"
+                                                                src="{{ asset('storage/' . $item->description_img) }}"
+                                                                alt="">
                                                         </span>
                                                     </a>
                                                 </li>
-                                             
+
                                             </ul>
                                             <!--end::Navigation-->
                                         </div>
@@ -206,7 +206,7 @@
                                 <div class="mt-7">
                                     <div class="">
                                         <img style="width:220px;border-radius:10px"
-                                        src="{{ asset('storage/' . $item->image) }}" alt="">
+                                            src="{{ asset('storage/' . $item->image) }}" alt="">
                                     </div>
                                     <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                         <span class="font-size-h3 font-weight-boldest">JB</span>
@@ -215,22 +215,24 @@
                                 <!--end::User-->
                                 <!--begin::Name-->
                                 <div class="my-2">
-                                    <a href="{{ route('admin.rooms.update',$item->id) }}"
+                                    <a href="{{ route('admin.rooms.update', $item->id) }}"
                                         class="text-dark font-weight-bold text-hover-primary font-size-h4">{{ $item->title }}</a>
                                 </div>
                                 <!--end::Name-->
                                 <!--begin::Label-->
-                                @if ($item->status == 2)
-                                    <span
-                                        class="label label-inline label-lg label-light-primary btn-sm font-weight-bold">Chống</span>
-                                @elseif ($item->status == 1)
-                                    <span class="label label-inline label-lg label-light-info btn-sm font-weight-bold">Đã
-                                        đặt</span>
-                                @elseif ($item->status == 3)
-                                    <span
-                                        class="label label-inline label-lg label-light-warning btn-sm font-weight-bold">Chưa
-                                        thanh toán</span>
-                                @endif
+                                <div style="width:60%;" class="dropdown bootstrap-select form-control dropup">
+                                    <select class="form-control selectpicker doikieu"
+                                        data-url="{{ route('admin.rooms.change', $item->id) }}"
+                                        data-id="{{ $item->id }}" title="Trạng Thái" data-style="btn-success"
+                                        tabindex="null">
+                                        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}
+                                            data-product-value="1">Đẵ đặt</option>
+                                        <option value="2" {{ $item->status == 2 ? 'selected' : '' }}
+                                            data-product-value="2">Chống</option>
+                                        <option value="3" {{ $item->status == 3 ? 'selected' : '' }}
+                                            data-product-value="3">Đã thanh toán</option>
+                                    </select>
+                                </div>
                                 <!--end::Label-->
                                 <!--begin::Buttons-->
                                 <div class="mt-9 mb-6">
@@ -264,19 +266,34 @@
                                                         data-toggle="tooltip" data-placement="right"></i>
                                                 </li>
                                                 <li class="navi-separator mb-3 opacity-70"></li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <span
-                                                                class="label label-xl label-inline label-light-success">{{ $item->service->title ?? 'Giá trị mặc định' }}</span>
-                                                        </span>
-                                                    </a>
-                                                </li>
+
+                                                @if ($item->services && count($item->services) > 0)
+                                                    @foreach ($item->services as $ser)
+                                                        <li class="navi-item">
+                                                            <a href="#" class="navi-link">
+                                                                <span class="navi-text">
+                                                                    <span
+                                                                        class="label label-xl label-inline label-light-success">{{ $ser->title ?? 'Giá trị mặc định' }}</span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li class="navi-item">
+                                                        <a href="#" class="navi-link">
+                                                            <span class="navi-text">
+                                                                <span
+                                                                    class="label label-xl label-inline label-light-success">Không
+                                                                    có dịch vụ</span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                @endif
                                             </ul>
                                             <!--end::Navigation-->
                                         </div>
                                     </div>
-                                    <a href="{{ route('admin.rooms.update',$item->id) }}"
+                                    <a href="{{ route('admin.rooms.update', $item->id) }}"
                                         class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon mr-2"
                                         title="Edit details">
                                         <span class="svg-icon svg-icon-md">
@@ -296,7 +313,7 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    <a onclick="if (confirm('Bạn có muốn xóa không ?')) { window.location.href = ''; }"
+                                    <a onclick="if (confirm('Bạn có muốn xóa không ?')) { window.location.href = '{{ route('admin.rooms.delete', $item->id) }}'; }"
                                         class="btn btn-sm btn-default btn-text-primary btn-hover-primary btn-icon"
                                         title="Delete">
                                         <span class="svg-icon svg-icon-md">
@@ -388,82 +405,83 @@
             /* Màu trắng cho trang bị vô hiệu hóa */
         }
     </style>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script>
-         // var maxTitleLength = 5; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn cho tiêu đề cột
- 
-         // // Lặp qua tất cả các tiêu đề cột và cắt chúng nếu quá dài
-         // document.querySelectorAll('.description').forEach(function(th) {
-         //     var text = th.textContent;
-         //     if (text.length > maxTitleLength) {
-         //         th.textContent = text.substring(0, maxTitleLength) + '...';
-         //     }
-         // });
- 
-         var maxContentLength = 50; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn
-         var descriptionTds = document.getElementsByClassName("description");
- 
-         for (var i = 0; i < descriptionTds.length; i++) {
-             var descriptionTd = descriptionTds[i];
-             var content = descriptionTd.textContent;
- 
-             if (content.length > maxContentLength) {
-                 descriptionTd.textContent = content.substring(0, maxContentLength) + '...';
-             }
-         };
- 
-         $(document).ready(function() {
-             $('.doikieu').on('change', function() {
-                     var status = $(this).prop('checked') ? 1 : 2;
-                     var id = $(this).data('id');
-                     var url = $(this).data('url');
-                     $.ajax({
-                         url: url,
-                         method: 'POST',
-                         data: {
-                             _token: '{{ csrf_token() }}',
-                             status: status,
-                             id: id
-                         },
-                         success: function(response) {
-                             Swal.fire({
-                                 icon: 'success',
-                                 title: 'Thành công!',
-                                 text: response.success,
-                             })
-                             console.log(response
-                                 .success); // In thông báo thành công hoặc thông tin trạng thái mới
-                         },
-                         error: function(error) {
-                             console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
-                         }
-                     });
-                 }),
-                 $('.slect-status').change(function() {
-                     var stt = $(this).val();
- 
-                     $.ajax({
-                         url: '{{ route('admin.types.fillersStt') }}',
-                         type: 'GET',
-                         data: {
-                             status: stt
-                         },
-                         success: function(data) {
-                             var htm = $('#product-list').empty();
-                             htm.empty();
-                             $.each(data, function(index, item) {
-                                 var newrow = $('<tr>');
-                                 newrow.append($('<td>').text(item.title));
-                                 htm.append(newrow);
-                             });
- 
-                             console.log(data);
-                         },
-                         error: function(data) {
-                             console.log(data);
-                         }
-                     });
-                 });
-         });
-     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // var maxTitleLength = 5; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn cho tiêu đề cột
+
+        // // Lặp qua tất cả các tiêu đề cột và cắt chúng nếu quá dài
+        // document.querySelectorAll('.description').forEach(function(th) {
+        //     var text = th.textContent;
+        //     if (text.length > maxTitleLength) {
+        //         th.textContent = text.substring(0, maxTitleLength) + '...';
+        //     }
+        // });
+
+        var maxContentLength = 50; // Thay đổi giá trị này tùy theo độ dài tối đa bạn muốn
+        var descriptionTds = document.getElementsByClassName("description");
+
+        for (var i = 0; i < descriptionTds.length; i++) {
+            var descriptionTd = descriptionTds[i];
+            var content = descriptionTd.textContent;
+
+            if (content.length > maxContentLength) {
+                descriptionTd.textContent = content.substring(0, maxContentLength) + '...';
+            }
+        };
+
+        $(document).ready(function() {
+            $('.doikieu').on('change', function() {
+                    var url = $(this).data('url');
+                    var id = $(this).data('id');
+                    var val = $(this).find('option:selected').data('product-value');
+                    console.log(val);
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            status: val,
+                            id: id
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: response.success,
+                            })
+                            console.log(response
+                                .success); // In thông báo thành công hoặc thông tin trạng thái mới
+                        },
+                        error: function(error) {
+                            console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
+                        }
+                    });
+                }),
+                $('.slect-status').change(function() {
+                    var stt = $(this).val();
+
+                    $.ajax({
+                        url: '{{ route('admin.types.fillersStt') }}',
+                        type: 'GET',
+                        data: {
+                            status: stt
+                        },
+                        success: function(data) {
+                            var htm = $('#product-list').empty();
+                            htm.empty();
+                            $.each(data, function(index, item) {
+                                var newrow = $('<tr>');
+                                newrow.append($('<td>').text(item.title));
+                                htm.append(newrow);
+                            });
+
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
+                });
+        });
+    </script>
 @endsection

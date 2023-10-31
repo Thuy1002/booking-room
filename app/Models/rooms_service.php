@@ -15,4 +15,11 @@ class rooms_service extends Model
         'service_id', // ID của dịch vụ
         // Các trường khác nếu cần
     ];
+    public function room(){
+        return $this->belongsTo(rooms::class);
+     }
+    public function service()
+    {
+        return $this->belongsTo(service::class);
+    }
 }

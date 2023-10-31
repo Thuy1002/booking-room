@@ -9,10 +9,15 @@ class type extends Model
 {
     use HasFactory;
     protected $table = 'types';
-    protected $fillable = ['title','content','status'];
+    protected $fillable = ['title', 'content', 'status'];
 
 
-    public function room(){
-       return  $this->hasMany(rooms::class);
+    public function room()
+    {
+        return  $this->hasMany(rooms::class);
+    }
+    public function service_room()
+    {
+        return $this->belongsTo(rooms_service::class);
     }
 }
