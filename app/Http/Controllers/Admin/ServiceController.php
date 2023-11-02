@@ -30,6 +30,11 @@ class ServiceController extends Controller
    }
 
 
+    public function add(){
+        $user = Auth::user();
+        return view('Admin.service.add',compact('user'));
+    }
+
    public function delet($id)
    {
        $item = service::find($id);

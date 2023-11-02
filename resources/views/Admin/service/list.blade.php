@@ -1,6 +1,6 @@
 @extends('layout.Admin.master')
 @section('title')
-    Danh Sách Loại Phòng
+    Danh Sách dịch vụ
 @endsection
 @section('content')
     <div class="row">
@@ -86,7 +86,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="{{ route('admin.types.add') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ route('admin.service.add') }}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -223,7 +223,7 @@
                                                             <label>
                                                                 <input class="doikieu" type="checkbox"
                                                                     {{ $item->status == 1 ? 'checked' : '' }}
-                                                                data-id="{{ $item->id }}"
+                                                                data-service-id="{{ $item->id }}"
                                                                 data-url="{{ route('admin.service.change', $item->id) }}" />
                                                                 <span></span>
                                                             </label>
@@ -375,8 +375,13 @@
         $(document).ready(function() {
             $('.doikieu').on('change', function() {
                 var status = $(this).prop('checked') ? 1 : 2;
-                var id = $(this).data('id');
+                var id = $(this).data('service-id');
                 var url = $(this).data('url');
+                console.log('Dữ liệu gửi đi:');
+                console.log('_token:', '{{ csrf_token() }}');
+                console.log('status:', status);
+                console.log('id:', id);
+                console.log('url:', url);
                 $.ajax({
                     url: url,
                     method: 'POST',
