@@ -1,6 +1,6 @@
 @extends('layout.Admin.master')
 @section('title')
-    Thêm mới phòng
+    Test 2
 @endsection
 @section('content')
     <div style="margin: auto;width: 70%;margin-top: -50px;" class="card card-custom">
@@ -115,6 +115,7 @@
                             id="example-number-input" />
                     </div>
                 </div>
+
             </div>
             <div class="card-footer">
                 <div class="row">

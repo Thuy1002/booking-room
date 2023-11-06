@@ -186,20 +186,22 @@
                                                         title="Click to learn more..."></i>
                                                 </li>
                                                 <li class="navi-separator mb-3 opacity-70"></li>
-                                                <li class="navi-item">
-                                                    <a href="#" class="navi-link">
-                                                        <span class="navi-text">
-                                                            <img style="width:20%;"
-                                                                src="{{ asset('storage/' . $item->description_img) }}"
-                                                                alt="">
-                                                        </span>
-                                                    </a>
+                                                <li class="navi-item" style="max-height: 200px; overflow: auto;">
+                                                    @foreach ($item->images as $im)
+                                                        <a href="#" class="navi-link">
+                                                            <span class="navi-text">
+                                                                <img style="width:20%;"
+                                                                    src="{{ asset('storage/' . $im->image_path) }}"
+                                                                    alt="">
+                                                            </span>
+                                                        </a>
+                                                    @endforeach
                                                 </li>
-
                                             </ul>
                                             <!--end::Navigation-->
                                         </div>
                                     </div>
+
                                 </div>
                                 <!--end::Toolbar-->
                                 <!--begin::User-->

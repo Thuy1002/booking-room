@@ -116,22 +116,36 @@
                             id="exampleTextarea" rows="3">{{ $roo->description }}</textarea>
                     </div>
                 </div>
+                {{-- <div class="form-group row">
+                    <label for="example-number-input" class="col-2 col-form-label">Ảnh mô tả</label>
+                    <div class="col-10">
+                        <input style="width: 70%;" class="form-control" type="file" name="description_img"
+                            id="" />
+                        <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->description_img) }}"
+                            alt="">
+                    </div>
+                </div> --}}
                 <div class="form-group row">
                     <label for="example-number-input" class="col-2 col-form-label">Ảnh mô tả</label>
                     <div class="col-10">
-                        <input style="width: 70%;" class="form-control" type="file" name="description_img"  id="" />
-                        <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->description_img) }}" alt="">
+                        <input style="width: 70%;" class="form-control" type="file" multiple accept="image/*"
+                            name="description_img[]" id="" />
+                        @foreach ($roo->images as $item)
+                            <img style="margin: 10px 0; width:15%;"
+                                src="{{ asset('storage/' . $item->image_path) }}" alt="">
+                        @endforeach
+
                     </div>
-                  
                 </div>
                 <div class="form-group row">
                     <label for="example-number-input" class="col-2 col-form-label">Ảnh</label>
                     <div class="col-10">
-                        <input style="width: 70%;" class="form-control" 
-                            type="file" name="image" id="example-number-input" />
-                            <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->image) }}" alt="">
+                        <input style="width: 70%;" class="form-control" type="file" name="image"
+                            id="example-number-input" />
+                        <img style="margin: 10px 0; width:15%;" src="{{ asset('storage/' . $roo->image) }}"
+                            alt="">
                     </div>
-                  
+
                 </div>
 
             </div>

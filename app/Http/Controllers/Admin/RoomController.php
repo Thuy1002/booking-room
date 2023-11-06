@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\rooms;
 use App\Models\service;
+use App\Models\TableImages;
 use App\Models\type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class RoomController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $rooms = rooms::with(['type', 'services',])->orderBy('created_at', 'desc')->paginate(8);
+        $rooms = rooms::with(['type', 'services', 'images'])->orderBy('created_at', 'desc')->paginate(8);
+        // dd($rooms);
         return view('Admin.rooms.list', compact('rooms', 'user'));
     }
     public function add()
@@ -32,7 +34,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $img = $request->file('image')->store('images', 'public'); // Lưu vào thư mục "storage/app/public/images";
-        $img_des = $request->file('description_img')->store('images', 'public');
+        // $img_des = $request->file('description_img')->store('images', 'public');
         $selectedServices = $request->input('service_id');
         $roo = $request->only([
             'title',
@@ -45,8 +47,17 @@ class RoomController extends Controller
             'description',
         ]);
         $roo['image'] = $img;
-        $roo['description_img'] = $img_des;
         $room =  rooms::create($roo);
+        $room_id = $room->id;
+        foreach ($request->file('description_img') as $immm) {
+            $img = new TableImages();
+            $img->rooms_id =  $room_id;
+            $img->image_name =  $immm->getClientOriginalName(); //láy tên ảnh
+            $img->image_path = $immm->store('images', 'public');
+            $img->save();
+        };
+        // dd($img);
+
         $room->services()->attach($selectedServices);
 
         return redirect()->route('admin.rooms.list')->with('success', 'thêm mới thành công');
@@ -59,7 +70,7 @@ class RoomController extends Controller
         if ($request->isMethod('post')) {
             $roo = rooms::find($id);
             $img = $request->file('image')->store('images', 'public'); // Lưu vào thư mục "storage/app/public/images";
-            $img_des = $request->file('description_img')->store('images', 'public');
+            //  $img_des = $request->file('description_img')->store('images', 'public');
             $selectedServices = $request->input('service_id');
             $update = $request->only([
                 'title',
@@ -72,12 +83,18 @@ class RoomController extends Controller
                 'description',
             ]);
             $update['image'] = $img;
-            $update['description_img'] = $img_des;
+            foreach ($request->file('description_img') as $immm) {
+                $img = new TableImages();
+                $img->rooms_id =$roo->id;
+                $img->image_name =  $immm->getClientOriginalName(); //láy tên ảnh
+                $img->image_path = $immm->store('images', 'public');
+                $img->save();
+            };
             $roo->update($update);
             $roo->services()->sync($selectedServices);
             return redirect()->route('admin.rooms.list')->with('success', 'Sửa thành công');
         } else {
-            $roo = rooms::with(['type', 'services'])->find($id);
+            $roo = rooms::with(['type', 'services','images'])->find($id);
             //   dd($roo->refresh());
             return view('Admin.rooms.update', compact('user', 'roo', 'type', 'servi'));
         }
@@ -89,13 +106,13 @@ class RoomController extends Controller
         $item->save();
         return response()->json(['success' => 'Cập nhật trạng thái thành công']);
     }
-    
-   public function delet($id)
-   {
-       $item = rooms::find($id);
-       $item->delete();
-       return back()->with('success', 'Xóa thành công');
-   }
+
+    public function delet($id)
+    {
+        $item = rooms::find($id);
+        $item->delete();
+        return back()->with('success', 'Xóa thành công');
+    }
 }
  // if ($item->status == 1) {
         //     $item->update(['status' => 2]);

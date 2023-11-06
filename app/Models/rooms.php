@@ -20,4 +20,8 @@ class rooms extends Model
         return $this->belongsToMany(service::class, 'rooms_service');
     }
  
+
+    public function images(){
+     return $this->hasMany(TableImages::class);
+    }
 }
