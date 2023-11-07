@@ -6,6 +6,7 @@ use App\Models\blog;
 use App\Models\booking;
 use App\Models\categori_service;
 use App\Models\comment;
+use App\Models\Discount;
 use App\Models\room;
 use App\Models\rooms;
 use App\Models\service;
@@ -24,6 +25,7 @@ class BaseSeeder extends Seeder
     public function run()
     {
         //
+        Discount::factory(10)->create();
         blog::factory(5)->create(); 
         categori_service::factory(5)->create();   
         type::factory(5)->create();  
