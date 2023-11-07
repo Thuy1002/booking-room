@@ -3,14 +3,14 @@
     Chỉnh sửa
 @endsection
 @section('content')
-    <div style="width: 50%;margin: auto; margin-top: -50px;" class="card card-custom">
+    <div style="width: 50%;margin: auto;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
-               Chỉnh sửa nội dung
+                Chửa sửa dịch vụ
             </h3>
         </div>
         <!--begin::Form-->
-        <form class="form" action="{{ route('admin.types.update',$typ->id) }}" method="POST" enctype="multipart/form-data">
+        <form class="form" action="{{ route('admin.service.update',$service->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group form-group-last">
@@ -22,12 +22,57 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Tên loại phòng</label>
-                    <input type="text" name="title" value="{{$typ->title}}" class="form-control form-control-solid" placeholder="" />
+                    <label>Tên dịch vụ</label>
+                    <input type="text" name="title" value="{{$service->title}}" class="form-control form-control-solid" placeholder="" />
+                </div>
+                <div class="form-group row">
+
+                    <div class="col-lg-10">
+                        <div class="form-group row align-items-center">
+                            <div class="col-md-5">
+                                <label>Loại dịch vụ:</label>
+                                <div>
+                                    <select name="categori_service_id" class="form-control ">
+                                        <option  selected> {{$service->categori->title}}</option>
+                                        @foreach ($cate as $item)
+                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="d-md-none mb-2"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Giá: VNĐ</label>
+                                <input type="number" value="{{$service->price}}" class="form-control" name="price" />
+                                <div class="d-md-none mb-2"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Ảnh:</label>
+                                <input type="file" class="form-control" name="image" />
+                                <div class="d-md-none mb-2"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
                 <div class="form-group">
                     <label for="exampleTextarea">Mô tả</label>
-                    <textarea name="content"  class="form-control form-control-solid" rows="3">{{$typ->content}}"</textarea>
+                    <textarea name="content" class="form-control form-control-solid" rows="3">{{$service->description}}</textarea>
+                </div>
+                <div class="form-group d-flex">
+                    <div style="height: 40px;" class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="la la-clock-o"></i>
+                        </span>
+                    </div>
+                    <div style="margin-left: 10px;" class="">
+                        <div class="input-group timepicker">
+                            <input class="form-control is-valid" placeholder="Select time" value="{{$service->duration}}" name="duration"  type="text">
+                            <div class="valid-feedback">Thời gian hoàn thành dịch vụ</div>
+                        </div>
+                        <span class="form-text text-muted">Tips: Hãy bo cho nhân viên tiền dịch vụ !!</span>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">

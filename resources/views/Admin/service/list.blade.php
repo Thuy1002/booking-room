@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div style="margin:auto;margin-top:-50px;" class="col-xl-10">
+        <div style="margin:auto;" class="col-xl-10">
             <div style="display: flex;margin-bottom:20px ;justify-content: space-between;"
                 class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
@@ -195,7 +195,7 @@
                                                 <td class="pl-0">
                                                     <div class="symbol symbol-50 symbol-light mt-2 mr-2">
                                                         <span style=" width: 90px; height: 74px;" class="symbol-label">
-                                                            <img src="{{ asset('storage/' . $item->image) }}"
+                                                            <img  style="border-radius:5px; width: 90px; height: 74px;" src="{{ asset('storage/' . $item->image) }}"
                                                                 class="" alt="">
                                                         </span>
                                                     </div>
@@ -275,7 +275,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-right pr-0">
-                                                    <a href="#" class="btn btn-icon btn-light btn-sm">
+                                                    <a href="{{route('admin.service.update',$item->id)}}" class="btn btn-icon btn-light btn-sm">
                                                         <span
                                                             class="svg-icon svg-icon-md svg-icon-success"><!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
                                                                 xmlns="http://www.w3.org/2000/svg"

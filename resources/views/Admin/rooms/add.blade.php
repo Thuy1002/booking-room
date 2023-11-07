@@ -3,7 +3,7 @@
     Thêm mới phòng
 @endsection
 @section('content')
-    <div style="margin: auto;width: 70%;margin-top: -50px;" class="card card-custom">
+    <div style="margin: auto;width: 70%;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
                 Danh sách phòng
