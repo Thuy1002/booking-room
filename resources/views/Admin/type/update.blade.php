@@ -3,7 +3,7 @@
     Chỉnh sửa
 @endsection
 @section('content')
-    <div style="width: 50%;margin: auto; margin-top: -50px;" class="card card-custom">
+    <div style="width: 50%;margin: auto;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
                Chỉnh sửa nội dung

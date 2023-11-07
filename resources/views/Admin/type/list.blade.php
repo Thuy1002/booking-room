@@ -3,7 +3,7 @@
     Danh Sách Loại Phòng
 @endsection
 @section('content')
-    <div  style="margin-top: -50px;" class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div style="" class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
         <!--end::Subheader-->
         <!--begin::Entry-->
@@ -108,6 +108,21 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>New Record</a>
+                            <a style="margin-left: 5px;" id="delleALL" class="btn btn-danger  font-weight-bolder">
+                                <span class="svg-icon svg-icon-md">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <circle fill="#000000" cx="9" cy="15" r="6" />
+                                            <path
+                                                d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                                fill="#000000" opacity="0.3" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>Delete</a>
                             <!--end::Button-->
                         </div>
                     </div>
@@ -174,7 +189,11 @@
                             <tbody id="product-list">
                                 @foreach ($typ as $item)
                                     <tr>
-                                        <th scope="row">{{ $item->id }}</th>
+                                        <th scope="row"> <label class="checkbox">
+                                                <input class="click_all" type="checkbox" name="ids[]"
+                                                    data-id-all="{{ $item->id }}">
+                                                <span></span>
+                                            </label></th>
                                         <td>{{ $item->title }}</td>
                                         <td> {{ $item->content }}</td>
                                         <td>
@@ -183,7 +202,8 @@
                                                     <label>
                                                         <input class="doikieu" type="checkbox"
                                                             {{ $item->status == 1 ? 'checked' : '' }}
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.types.change', $item->id) }}"/>
+                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('admin.types.change', $item->id) }}" />
                                                         <span></span>
                                                     </label>
                                                 </span>
@@ -244,6 +264,7 @@
                 </div>
                 <!--end::Card-->
             </div>
+            {{-- @dd($typ) --}}
             <!--end::Container-->
         </div>
         <!--end::Entry-->
@@ -305,56 +326,81 @@
     <script>
         $(document).ready(function() {
             $('.doikieu').on('change', function() {
-                var status = $(this).prop('checked') ? 1 : 2;
-                var id = $(this).data('id');
-                var url = $(this).data('url');
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        status: status,
-                        id: id
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: response.success,
-                        })
-                        console.log(response
-                            .success); // In thông báo thành công hoặc thông tin trạng thái mới
-                    },
-                    error: function(error) {
-                        console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
-                    }
-                });
-            }),
-            $('.slect-status').change(function() {
-                var stt = $(this).val();
+                    var status = $(this).prop('checked') ? 1 : 2;
+                    var id = $(this).data('id');
+                    var url = $(this).data('url');
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            status: status,
+                            id: id
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: response.success,
+                            })
+                            console.log(response
+                                .success); // In thông báo thành công hoặc thông tin trạng thái mới
+                        },
+                        error: function(error) {
+                            console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
+                        }
+                    });
+                }),
+                $('.slect-status').change(function() {
+                    var stt = $(this).val();
 
-                $.ajax({
-                    url: '{{ route('admin.types.fillersStt') }}',
-                    type: 'GET',
-                    data: {
-                        status: stt
-                    },
-                    success: function(data) {
-                        var htm = $('#product-list').empty();
-                        htm.empty();
-                        $.each(data, function(index, item) {
-                            var newrow = $('<tr>');
-                            newrow.append($('<td>').text(item.title));
+                    $.ajax({
+                        url: '{{ route('admin.types.fillersStt') }}',
+                        type: 'GET',
+                        data: {
+                            status: stt
+                        },
+                        success: function(data) {
+                            var htm = $('#product-list').empty();
+                            //   htm.empty();
+                            $.each(data, function(index, item) {
+                                var newrow = $('<tr>');
+                                newrow.append($('<td>').text(item.title));
                                 htm.append(newrow);
-                        });
+                            });
 
-                        console.log(data);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
                 });
+
+            $('#delleALL').click(function() {
+                var arrfall = [];
+                $('input[name="ids[]"]:checked').each(function() {
+                    arrfall.push($(this).data('id-all'));
+                });
+                console.log(arrfall);
+                if (arrfall.length > 0) {
+                    $.ajax({
+                        url: '{{ route('admin.types.dellAll') }}',
+                        type: 'POST',
+                        data: {
+                            id: arrfall,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error); // In thông báo lỗi
+                        }
+                    });
+                }
             });
+
         });
     </script>
 @endsection

@@ -22,5 +22,6 @@ Route::prefix('/admin/types')->name('admin.types.')->middleware('check-admin')->
      Route::post('change/{id}','updateStatus')->name('change');
      Route::match( ['get', 'post'], 'update/{id}','update')->name('update');
      Route::get('delete/{id}','delet')->name('delete');
+     Route::post('dellAll','dellAll')->name('dellAll');
 });
 

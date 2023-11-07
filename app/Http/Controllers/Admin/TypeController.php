@@ -80,16 +80,31 @@ class TypeController extends Controller
     {
         $status = $request->input('status');
         $query = type::query();
-        dd($query);
+        // dd($query);
         if (!empty($status)) {
             $query->where('status', $status);
-        }
-        else{
-            if($status==0){
+        } else {
+            if ($status == 0) {
                 $query->get();
             }
         }
         $typ = $query->get();
         return  response()->json($typ);
+    }
+
+
+    public function dellAll(Request $request)
+    {
+        foreach ($request->input('ids') as $ab) {
+            $typ = type::find($ab);
+            // dd($typ);
+            if ($typ) {
+                // Thử xóa phòng trước
+                $typ->room()->delete();
+                // Sau đó xóa bản ghi type
+                $typ->delete();
+            }
+        };
+        return response()->json(['success' => 'xóa thành công']);
     }
 }
