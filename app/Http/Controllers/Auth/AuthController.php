@@ -42,7 +42,8 @@ class AuthController extends Controller
             // return redirect('login')->with('failed', 'đăng nhập thất bại !');
         }
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('auth.login');
     }
