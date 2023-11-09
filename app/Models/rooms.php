@@ -20,6 +20,9 @@ class rooms extends Model
         return $this->belongsToMany(service::class, 'rooms_service');
     }
  
+    public function discounts(){
+        return $this->hasMany(Discount::class);
+    }
 
     public function images(){
      return $this->hasMany(TableImages::class);

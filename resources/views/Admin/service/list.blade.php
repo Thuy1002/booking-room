@@ -377,11 +377,6 @@
                 var status = $(this).prop('checked') ? 1 : 2;
                 var id = $(this).data('service-id');
                 var url = $(this).data('url');
-                console.log('Dữ liệu gửi đi:');
-                console.log('_token:', '{{ csrf_token() }}');
-                console.log('status:', status);
-                console.log('id:', id);
-                console.log('url:', url);
                 $.ajax({
                     url: url,
                     method: 'POST',

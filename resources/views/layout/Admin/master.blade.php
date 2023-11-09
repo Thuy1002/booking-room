@@ -42,11 +42,14 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Layout Themes-->
     <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
 
-<style>
-    .swal2-icon.swal2-success.swal2-icon-show{
-        margin: auto;
-    }
-</style>
+    <style>
+        .swal2-icon.swal2-success.swal2-icon-show {
+            margin: auto;
+        }
+        .swal2-icon.swal2-error.swal2-icon-show {
+            margin: auto;
+        }
+    </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -153,7 +156,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 @include('layout.Admin.header')
                 <!--end::Header-->
                 <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <div style="margin-top: -50px;" class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     {{-- <div class="d-flex flex-column-fluid">
                     </div> --}}
                     @yield('content')
@@ -194,7 +197,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
-                    <a href="#"
+                    <a href="{{route('admin.account.about')}}"
                         class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->name }}</a>
                     <div class="text-muted mt-1">Giới tính: {{ $user->gender }}</div>
                     <div class="navi mt-2">
@@ -342,6 +345,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{ asset('admin/assets/js/pages/widgets.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('admin/assets/js/pages/features/charts/apexcharts.js') }}"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

@@ -3,7 +3,7 @@
     Danh Sách Loại Dịch Vụ
 @endsection
 @section('content')
-    <div style="margin-top: -50px;" class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div style="" class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Subheader-->
         <!--end::Subheader-->
         <!--begin::Entry-->

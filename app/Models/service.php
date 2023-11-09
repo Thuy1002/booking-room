@@ -11,4 +11,9 @@ class service extends Model
     protected $table = 'services';
     protected $fillable = ['id','categori_service_id','title','duration','price','status','image','description'];
 
+
+    public function categori(){
+        return $this->belongsTo(categori_service::class,'categori_service_id');
+    }
+
 }
