@@ -20,7 +20,7 @@ class CateServiceController extends Controller
     public function Changestt($id)
     {
         $cate = categori_service::find($id);
-        dd($cate);
+        // dd($cate);
         if ($cate->status == 1) {
             $cate->update(['status' => 2]);
         } elseif ($cate->status == 2) {
