@@ -1,11 +1,27 @@
-<div style="min-height: 600px;" class="booking_table d_flex align-items-center">
-    <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+<div class="slider-item"  style="background-image: url('{{ asset('client/images/bg_1.jpg') }}');">
+    <div class="overlay"></div>
     <div class="container">
-        <div class="banner_content text-center">
-            <h6>Away from monotonous life</h6>
-            <h2>Relax Your Mind</h2>
-            <p>If you are looking at blank cassettes on the web, you may be very confused at the<br> difference in price. You may see some for as low as $.17 each.</p>
-            <a href="#" class="btn theme_btn button_hover">Get Started</a>
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-12 ftco-animate text-center">
+                <div class="text mb-5 pb-3">
+                    <h1 class="mb-3">Welcome To Deluxe</h1>
+                    <h2>Hotels &amp; Resorts</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slider-item" style="background-image:url('{{asset('client/images/bg_2.jpg')}}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-12 ftco-animate text-center">
+                <div class="text mb-5 pb-3">
+                    <h1 class="mb-3">Enjoy A Luxury Experience</h1>
+                    <h2>Join With Us</h2>
+                </div>
+            </div>
         </div>
     </div>
 </div>
