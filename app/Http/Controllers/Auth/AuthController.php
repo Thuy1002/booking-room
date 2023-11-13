@@ -22,9 +22,8 @@ class AuthController extends Controller
             Auth::guard('web')->attempt([
                 'email' => $request->email,
                 'password' => $request->password,
-                'status' => 2
-            ])
-        ) {
+                'role' => 2
+            ])) {
             if (Session::get('backUrl')) {
                 $url = Session::get('backUrl');
                 Session::forget('backUrl');
@@ -34,7 +33,7 @@ class AuthController extends Controller
         } elseif (Auth::guard('web')->attempt([
             'email' => $request->email,
             'password' => $request->password,
-            'status' => 1
+            'role' => 1
         ])) {
             return redirect()->route('admin.home')->with('success', 'Đăng nhập thành công');
         } else {
