@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog', function (Blueprint $table) {
+        Schema::create('booking_service', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('title');
-            $table->integer('status')->default(1);
-            $table->text('content');
-            $table->string('image')->nullable();
-            $table->string('image_description')->nullable();
+            $table->integer('booking_id');
+            $table->integer('service_id');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog');
+        Schema::dropIfExists('booking_service');
     }
 };

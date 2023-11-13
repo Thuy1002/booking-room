@@ -23,6 +23,7 @@ class roomsFactory extends Factory
             'imagfacilitiese'=>fake()->text(10),
             'view'=>fake()->text(10),
             'floor'=>Arr::random([4,9.10,15,20]),
+            'size'=>Arr::random([40,55,67,98,57,46]),
             'type_id' =>rand(1,5),
             'image'=>'client/image/room4.jpg',
             'description' =>fake()->text(300),

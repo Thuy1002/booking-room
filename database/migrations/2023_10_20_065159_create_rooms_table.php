@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('service')->nullable();
             $table->string('image')->nullable();
             $table->string('description_img')->nullable();
+            $table->integer('size')->nullable();
             $table->text('description')->nullable();
             $table->integer('price')->nullable();
             $table->integer('status')->default(0);

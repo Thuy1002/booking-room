@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name' => 'Mr.Thuy',
-                'email' => 'dangthanhthuy022002@gmail.com.com',
+                'email' => 'dangthanhthuy022002@gmail.com',
                 'password' => Hash::make(123456),
                 'image' => '',
                 'role' => 2,//client
