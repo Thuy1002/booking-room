@@ -3,78 +3,84 @@
     Dashboard
 @endsection
 @section('content')
-    <div style="margin-top: -50px;margin:auto;" class="col-lg-12">
+    <div style="margin:auto;" class="col-lg-12">
+        <!--begin::Card-->
+
         <!--begin::Card-->
         <div class="card card-custom gutter-b">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">Bubble Chart</h3>
+            <!--begin::Header-->
+            <div class="card-header h-auto">
+                <!--begin::Title-->
+                <div class="card-title py-5">
+                    <h3 class="card-label">Line Chart</h3>
                 </div>
+                <!--end::Title-->
             </div>
+            <!--end::Header-->
             <div class="card-body">
                 <!--begin::Chart-->
-                <div id="chart_8"></div>
+                <div id="chart_1"></div>
                 <!--end::Chart-->
             </div>
         </div>
         <!--end::Card-->
+
+        <!--end::Card-->
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script>
-        var _demo8 = function() {
-            const apexChart = "#chart_8";
-            var options = {
-                series: [{
-                        name: 'Phòng chống',
-                        data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                            min: 10,
-                            max: 60
-                        })
-                    },
-                    {
-                        name: 'Phòng đặt',
-                        data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                            min: 10,
-                            max: 60
-                        })
-                    },
-                    {
-                        name: 'Phản hồi tốt',
-                        data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                            min: 10,
-                            max: 60
-                        })
-                    },
-                    {
-                        name: 'Phản hồi tệ',
-                        data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
-                            min: 10,
-                            max: 60
-                        })
-                    }
-                ],
-                chart: {
-                    height: 350,
-                    type: 'bubble',
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                fill: {
-                    opacity: 0.8
-                },
-                xaxis: {
-                    tickAmount: 12,
-                    type: 'category',
-                },
-                yaxis: {
-                    max: 70
-                },
-                colors: [primary, success, warning, danger]
-            };
+        $(document).ready(function() {
+            const primary = '#6993FF';
+            var KTApexChartsDemo = function() {
+                // Private functions
+                var _demo1 = function() {
+                    const apexChart = "#chart_1";
+                    var options = {
+                        series: [{
+                            name: "Desktops",
+                            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                        }],
+                        chart: {
+                            height: 350,
+                            type: 'line',
+                            zoom: {
+                                enabled: false
+                            }
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            curve: 'straight'
+                        },
+                        grid: {
+                            row: {
+                                colors: ['#f3f3f3',
+                                    'transparent'
+                                ], // takes an array which will be repeated on columns
+                                opacity: 0.5
+                            },
+                        },
+                        xaxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                        },
+                        colors: [primary]
+                    };
 
-            var chart = new ApexCharts(document.querySelector(apexChart), options);
-            chart.render();
-        }
+                    var chart = new ApexCharts(document.querySelector(apexChart), options);
+                    chart.render();
+                };
+                return {
+                    // public functions
+                    init: function() {
+                        _demo1();
+
+                    }
+                };
+            }
+            KTApexChartsDemo.init();
+        });
     </script>
 @endsection
