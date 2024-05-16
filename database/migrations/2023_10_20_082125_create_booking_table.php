@@ -16,17 +16,17 @@ return new class extends Migration
         Schema::create('booking', function (Blueprint $table) {
             $table->id();
             $table->integer('room_id');
-            $table->integer('service_id')->nullable();
+         // $table->integer('service_id')->nullable();
             $table->integer('user_id');
             $table->date('booking_date');
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->integer('adults')->nullable();
             $table->integer('status')->default(1);
-            $table->integer('payment_status')->default(1);
+            $table->string('payment_status')->default('null'); // đã thanh toán và chưa thanh toán
             $table->integer('children')->nullable();
             $table->integer('total_price')->nullable();
-            $table->integer('total_price_curr')->nullable();
+            //$table->integer('total_price_curr')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('comment', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('blog_id')->nullable();
+           // $table->integer('blog_id')->nullable();
             $table->integer('parent_id')->nullable();
-            $table->integer('room_id');
+           // $table->integer('room_id');
             $table->text('content');
-            $table->integer('rate');
+            $table->integer('rate')->nullable();
             $table->integer('status')->default(1);
             $table->string('image')->nullable();
             $table->timestamps();

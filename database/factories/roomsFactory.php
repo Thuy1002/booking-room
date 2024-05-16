@@ -28,7 +28,7 @@ class roomsFactory extends Factory
             'image'=>'client/image/room4.jpg',
             'description' =>fake()->text(300),
             'price' => Arr::random([200000, 500000, 1000000, 100000, 800000, 900000, 750000, 340000, 430000, 2000000]),
-            'status' =>Arr::random([1,2,3,4]),
+            'status' =>Arr::random(['cleaning','available','occupied']),
             'capacity' =>Arr::random([1,2,3,4,5,6]),
         ];
     }

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_comment', function (Blueprint $table) {
+        Schema::create('rate', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_id')->nullable();
-            $table->integer('rooms_id')->nullable();
-            $table->integer('blog_id')->nullable();
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
+            $table->integer('user_id');
+            $table->integer('room_id');
             $table->timestamps();
+            $table->string('comment')->nullable();
+            $table->integer('rating');
+           $table->integer('is_approved')->default(1); // is_approved: là đã được kiểm duyệt đánh giá hay chưa | mặc định là 1 thĩ được duyệt
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_comment');
+        Schema::dropIfExists('rate');
     }
 };
