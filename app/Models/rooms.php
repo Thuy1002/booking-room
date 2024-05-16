@@ -19,7 +19,17 @@ class rooms extends Model
     {
         return $this->belongsToMany(service::class, 'rooms_service');
     }
- 
+
+    public function booking()
+    {
+        return $this->hasMany(booking::class, 'rooms_service');
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany(comment::class, 'table_comment');
+    }
+
     public function discounts(){
         return $this->hasMany(Discount::class);
     }
