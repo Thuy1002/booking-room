@@ -1,6 +1,8 @@
+
 <?php
 
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Client\CommentController;
+use App\Http\Controllers\Client\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::prefix('/admin')->name('admin.')->middleware('check-admin')->controller(HomeController::class)->group( function(){
-
-    Route::get('home','incomeReport')->name('home');
-    Route::get('/get-income-data', 'getIncomeData')->name('getIncomeData');
-
+Route::prefix('rooms')->name('rooms.')->controller(CommentController::class)->group( function(){
+  
+   Route::post('comment/{room_id}','store')->name('comment');
 });
-
 
 

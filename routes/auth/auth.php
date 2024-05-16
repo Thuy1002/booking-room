@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(HomeController::class)->group(
-    function () {
-        Route::get('/','index')->name('client');
-    }
-);
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('client');
+});
 
-Route::prefix('/')->name('auth.')->controller(AuthController::class)->group(function(){
+
+Route::prefix('/')->name('auth.')->controller(AuthController::class)->group(function () {
     Route::get('login', 'index')->name('login');
     Route::get('logout', 'logout')->name('logout');
     Route::post('handel', 'handleLogin')->name('handleLogin');
+    Route::match(['get', 'post'], 'register', 'register')->name('register');
 });

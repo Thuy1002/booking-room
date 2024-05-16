@@ -1,6 +1,7 @@
 <?php
-
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Client\HomeController ;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Route::prefix('/admin')->name('admin.')->middleware('check-admin')->controller(HomeController::class)->group( function(){
-
-    Route::get('home','incomeReport')->name('home');
-    Route::get('/get-income-data', 'getIncomeData')->name('getIncomeData');
-
-});
 
 
 
