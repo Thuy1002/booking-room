@@ -86,7 +86,7 @@
                             </a>
                         </div>
                         <div>
-                            <a href="{{route('auth.register')}}" class="txt1">
+                            <a href="{{route('auth.singup')}}" class="txt1">
                                 Signup !
                             </a>
                         </div>

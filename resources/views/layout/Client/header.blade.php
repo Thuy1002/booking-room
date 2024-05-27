@@ -13,7 +13,7 @@
             <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
             <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
             <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="{{ route('auth.login') }}" class="nav-link">Login</a></li>
             @if (Auth::user())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
