@@ -123,9 +123,8 @@
                                     <select name="status" class="form-control  slect-status"
                                         id="kt_datatable_search_status">
                                         <option>Chọn</option>
-                                        <option value="0">Tát cả</option>
-                                        <option value="1">Hiện</option>
-                                        <option value="2">Ẩn</option>
+                                        <option value="pending">Chờ</option>
+                                        <option value="success">Sẵn sàng</option>
                                     </select>
                                 </div>
                             </div>
@@ -222,7 +221,7 @@
                                                         <span class="switch switch-outline switch-icon switch-primary">
                                                             <label>
                                                                 <input class="doikieu" type="checkbox"
-                                                                    {{ $item->status == 1 ? 'checked' : '' }}
+                                                                    {{ $item->status == 'success' ? 'checked' : '' }}
                                                                 data-service-id="{{ $item->id }}"
                                                                 data-url="{{ route('admin.service.change', $item->id) }}" />
                                                                 <span></span>
@@ -374,7 +373,8 @@
     <script>
         $(document).ready(function() {
             $('.doikieu').on('change', function() {
-                var status = $(this).prop('checked') ? 1 : 2;
+                var status = $(this).prop('checked') ? 'success' : 'pending';
+                console.log(status);
                 var id = $(this).data('service-id');
                 var url = $(this).data('url');
                 $.ajax({
@@ -391,8 +391,7 @@
                             title: 'Thành công!',
                             text: response.success,
                         })
-                        console.log(response
-                            .success); // In thông báo thành công hoặc thông tin trạng thái mới
+                        console.log(response.success); // In thông báo thành công hoặc thông tin trạng thái mới
                     },
                     error: function(error) {
                         console.log('Có lỗi xảy ra khi cập nhật trạng thái sản phẩm.');
@@ -401,11 +400,12 @@
             }),
             $('.slect-status').change(function() {
                 var stt = $(this).val();
-
+                console.log(stt);
                 $.ajax({
                     url: '{{ route('admin.types.fillersStt') }}',
                     type: 'GET',
                     data: {
+                        _token: '{{ csrf_token() }}',
                         status: stt
                     },
                     success: function(data) {
@@ -417,7 +417,7 @@
                                 htm.append(newrow);
                         });
 
-                        console.log(data);
+                        sconsole.log(data);
                     },
                     error: function(data) {
                         console.log(data);

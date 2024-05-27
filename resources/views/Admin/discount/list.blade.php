@@ -203,10 +203,10 @@
                                                 </td>
                                                 <td class="pl-0">
                                                     <div>
-                                                        <a href="#"
-                                                            class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">{{ $item->code }}</a>
+                                                        <span   class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"> {{ $item->code }}</span>
+                                                         
                                                         <span
-                                                            class="text-muted font-weight-bold d-block">{{ $item->amount }}.
+                                                            class="text-muted font-weight-bold d-block">{{ $item->amount }}%
                                                         </span>
                                                     </div>
 

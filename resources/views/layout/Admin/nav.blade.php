@@ -29,7 +29,7 @@
         </li>
 
         <li class="menu-item" aria-haspopup="true">
-            <a target="_blank" href="https://preview.keenthemes.com/metronic/demo1/builder.html" class="menu-link">
+            <a  href="{{ route('admin.home') }}" class="menu-link">
                 <span class="svg-icon menu-icon">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -46,8 +46,76 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="menu-text">Builder</span>
+                <span class="menu-text">Dashboard</span>
             </a>
+        </li>
+        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+            <a href="javascript" class="menu-link menu-toggle">
+                <span
+                    class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Shopping/Chart-bar1.svg--><svg
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <title>Stockholm-icons / Shopping / Chart-bar1</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs />
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13"
+                                rx="1.5" />
+                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8"
+                                rx="1.5" />
+                            <path
+                                d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z"
+                                fill="#000000" fill-rule="nonzero" />
+                            <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6"
+                                rx="1.5" />
+                        </g>
+                    </svg><!--end::Svg Icon--></span>
+                <span class="menu-text">Statistics</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="menu-submenu" style="display: none; overflow: hidden;" kt-hidden-height="80">
+                <i class="menu-arrow"></i>
+                <ul class="menu-subnav">
+                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                        <span class="menu-link">
+                            <span class="menu-text">Statistics</span>
+                        </span>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true">
+                        <a href="{{ route('admin.statistics.user') }}" class="menu-link">
+                            <i class="menu-bullet menu-bullet-dot">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Users</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true">
+                        <a href="{{ route('admin.statistics.rooms') }}" class="menu-link">
+                            <i class="menu-bullet menu-bullet-dot">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Rooms</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true">
+                        <a href="" class="menu-link">
+                            <i class="menu-bullet menu-bullet-dot">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Service</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true">
+                        <a href="{{ route('admin.statistics.income') }}" class="menu-link">
+                            <i class="menu-bullet menu-bullet-dot">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Income</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
         <li class="menu-item" aria-haspopup="true">
             <a target="" href="{{ route('admin.types.list') }}" class="menu-link">

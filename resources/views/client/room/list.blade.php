@@ -7,28 +7,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="row">
+                    <div id="list-product" class="row">
                         @foreach ($room as $item)
                             <div class="col-sm col-md-6 col-lg-4 ftco-animate">
                                 <div class="room">
-                                    <a href="{{route('rooms.detail',$item->id)}}" class="img d-flex justify-content-center align-items-center"
-                                        style="background-image: url('{{ asset('client/images/room-1.jpg') }}');">
+                                    <a href="{{ route('rooms.detail', $item->id) }}"
+                                        class="img d-flex justify-content-center align-items-center"
+                                        style="background-image: url('{{ asset('client/images/room-1.jpg') }}'); @if ($item->status == 'occupied') border: 1px solid red; @endif">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
                                     </a>
                                     <div class="text p-3 text-center">
-                                        <h3 class="mb-3"><a href="{{route('rooms.detail',$item->id)}}">{{$item->title}}</a></h3>
-                                        <p><span class="price mr-2">{{number_format($item->price)}} $</span> <span class="per">for Day</span></p>
+                                        <h3 class="mb-3"><a
+                                                href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
+                                        <p><span class="price mr-2">{{ number_format($item->price) }} $</span> <span
+                                                class="per">
+                                                @if ($item->status == 'occupied')
+                                                    out of room
+                                                @endif
+                                            </span></p>
                                         <ul class="list">
-                                            <li><span>Max:</span> {{$item->capacity}}</li>
-                                            <li><span>Size:</span> {{$item->size}} m2</li>
-                                            <li><span>View:</span> {{$item->view}}</li>
-                                            <li><span>floor:</span> {{$item->floor}}</li>
+                                            <li><span>Max:</span> {{ $item->capacity }}</li>
+                                            <li><span>Size:</span> {{ $item->size }} m2</li>
+                                            <li><span>View:</span> {{ $item->view }}</li>
+                                            <li><span>floor:</span> {{ $item->floor }}</li>
                                         </ul>
                                         <hr>
-                                        <p class="pt-1"><a href="{{route('rooms.detail',$item->id)}}" class="btn-custom">Book Now <span
-                                                    class="icon-long-arrow-right"></span></a></p>
+                                        <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
+                                                class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -51,14 +59,11 @@
                                 <div class="form-group">
                                     <div class="select-wrap one-third">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Room Type</option>
-                                            <option value="">Suite</option>
-                                            <option value="">Family Room</option>
-                                            <option value="">Deluxe Room</option>
-                                            <option value="">Classic Room</option>
-                                            <option value="">Superior Room</option>
-                                            <option value="">Luxury Room</option>
+
+                                        <select name="type" id="slect-type" class="form-control">
+                                            @foreach ($type as $item)
+                                                <option value ="{{ $item->id }}">{{ $item->title }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -159,4 +164,58 @@
     <div class="d-flex justify-content-between align-items-center flex-wrap">
         {{ $room->links('Admin.paginate') }}
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#slect-type').change(function() {
+                var selectedType = $(this).val();
+                // console.log("chạy vào đây:", selectedType);
+                $.ajax({
+                    url: '{{ route('rooms.slect') }}', // Đặt route tương ứng ở đây
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Thêm token CSRF vào dữ liệu gửi đi
+                        type: selectedType
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var filteredItemsDiv = $('#list-product');
+                        filteredItemsDiv.empty();
+                        // $.each(data, function(item) { không dùng each troang ajax
+                        data.forEach(item => {
+                            console.log("cái này là mảng:",item);
+                            // filteredItemsDiv.html(data.html);
+                            var roomHtml = `   
+                             <div class="col-sm col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">
+                                <div class="room">
+                                    <a href="http://127.0.0.1:8000/rooms/7" class="img d-flex justify-content-center align-items-center" style="background-image: url('http://127.0.0.1:8000/client/images/room-1.jpg'); ">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="icon-search2"></span>
+                                        </div>
+                                    </a>
+                                    <div class="text p-3 text-center">
+                                        <h3 class="mb-3"><a href="">${item.title}</a></h3>
+                                        <p><span class="price mr-2">2,000,000 $</span> <span class="per">
+                                                                                            </span></p>
+                                        <ul class="list">
+                                            <li><span>Max:</span> 1</li>
+                                            <li><span>Size:</span> 67 m2</li>
+                                            <li><span>View:</span> Maxime.</li>
+                                            <li><span>floor:</span> 9</li>
+                                        </ul>
+                                        <hr>
+                                        <p class="pt-1"><a href="http://127.0.0.1:8000/rooms/7" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>   `;
+                            filteredItemsDiv.append(roomHtml);
+                        });
+                    },
+                    error: function(xhr, status, error, data) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

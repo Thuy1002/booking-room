@@ -1,6 +1,6 @@
 @extends('layout.Admin.master')
 @section('title')
-    Thêm mới mã khuyến mãi
+   sửa khuyến mại
 @endsection
 @section('content')
     <div style="width: 50%;margin: auto;" class="card card-custom">

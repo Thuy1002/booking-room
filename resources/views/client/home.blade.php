@@ -13,7 +13,8 @@
                                 <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                                     <div class="wrap">
                                         <label for="#">Check-in Date</label>
-                                        <input type="text" name="check_in_date" class="form-control checkin_date" placeholder="Check-in date">
+                                        <input type="text" name="check_in_date" class="form-control checkin_date"
+                                            placeholder="Check-in date">
                                     </div>
                                 </div>
                             </div>
@@ -35,10 +36,10 @@
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                                 <select name="room" id="" class="form-control">
                                                     @foreach ($typ as $item)
-                                                    <option value="{{$item->id}}">{{$item->title}}</option>
+                                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
                                                     @endforeach
-                                                   
-                                                  
+
+
                                                 </select>
                                             </div>
                                         </div>
@@ -191,7 +192,8 @@
                 @foreach ($room as $item)
                     <div class="col-sm col-md-6 col-lg-4 ftco-animate">
                         <div class="room">
-                            <a href="{{route('rooms.detail',$item->id)}}" class="img d-flex justify-content-center align-items-center"
+                            <a href="{{ route('rooms.detail', $item->id) }}"
+                                class="img d-flex justify-content-center align-items-center"
                                 style="background-image:url('{{ asset('client/images/room-1.jpg') }}');">
                                 <div class="icon d-flex justify-content-center align-items-center">
                                     <span class="icon-search2"></span>
@@ -202,8 +204,8 @@
                                 <p><span class="price mr-2">{{ number_format($item->price) }} $</span> <span
                                         class="per">per night</span></p>
                                 <hr>
-                                <p class="pt-1"><a href="{{route('rooms.detail',$item->id)}}" class="btn-custom">View Room Details <span
-                                            class="icon-long-arrow-right"></span></a></p>
+                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}" class="btn-custom">View
+                                        Room Details <span class="icon-long-arrow-right"></span></a></p>
                             </div>
                         </div>
                     </div>
@@ -270,20 +272,18 @@
                                             <img class="rounded-circle" style="width:15%;"
                                                 src="{{ asset('client/images/person_2.jpg') }}" alt="">
                                             <div class="media-body">
-                                                <p>As conscious traveling Paupers we must always be concerned about our dear
-                                                    Mother Earth. If you think about it, you travel across her face, and She
-                                                    is
-                                                    the </p>
+                                                <p>{{ Str::limit($item->content, 150) }}</p>
                                                 <a href="#">
-                                                    <h4 class="sec_h4">Fanny Spencer</h4>
+                                                    <h4 class="sec_h4">{{$item->user->name}}</h4>
                                                 </a>
                                                 <div class="star">
-                                                    @for ($i = 0; $i < 5; $i++)
-                                                    @if ($i <= $item->rate)
-                                                    <a href="#"><i style="color: red" class="icon-heart color-danger"></i></a> </a>
-                                                    @else
-                                                    <a href="#"><i class="icon-heart color-danger"></i></a>
-                                                    @endif
+                                                    @for ($i = 1; $i <= 5 ; $i++)
+                                                        @if ($i <= $item->rate)
+                                                            <a href="#"><i style="color: red"
+                                                                    class="icon-heart color-danger"></i></a> </a>
+                                                        @else
+                                                            <a href="#"><i class="icon-heart color-danger"></i></a>
+                                                        @endif
                                                     @endfor
                                                 </div>
                                             </div>
@@ -308,24 +308,24 @@
             </div>
             <div class="row d-flex">
                 @foreach ($blog as $item)
-                <div class="col-md-3 d-flex ftco-animate">
-                    <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20"
-                            style="background-image: url('{{ asset('client/images/image_1.jpg') }}');">
-                        </a>
-                        <div class="text mt-3 d-block">
-                            <h3 class="heading mt-3"><a href="#">{{$item->content}}</a></h3>
-                            <div class="meta mb-3">
-                                <div><a href="#">{{$item->created_at}}</a></div>
-                                <div><a href="#">{{$item->user->name}}</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                    <div class="col-md-3 d-flex ftco-animate">
+                        <div class="blog-entry align-self-stretch">
+                            <a href="blog-single.html" class="block-20"
+                                style="background-image: url('{{ asset('client/images/image_1.jpg') }}');">
+                            </a>
+                            <div class="text mt-3 d-block">
+                                <h3 class="heading mt-3"><a href="#">{{ $item->content }}</a></h3>
+                                <div class="meta mb-3">
+                                    <div><a href="#">{{ $item->created_at }}</a></div>
+                                    <div><a href="#">{{ $item->user->name }}</a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
-              
-             
+
+
             </div>
         </div>
     </section>
@@ -382,3 +382,7 @@
         </div>
     </section>
 @endsection
+<script>
+
+    
+</script>

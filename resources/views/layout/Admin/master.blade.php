@@ -21,6 +21,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="description" content="Aside light theme example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
+    {{-- chart --}}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    {{-- end chart --}}
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -46,6 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
         .swal2-icon.swal2-success.swal2-icon-show {
             margin: auto;
         }
+
         .swal2-icon.swal2-error.swal2-icon-show {
             margin: auto;
         }
@@ -197,7 +201,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
-                    <a href="{{route('admin.account.about')}}"
+                    <a href="{{ route('admin.account.about') }}"
                         class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ $user->name }}</a>
                     <div class="text-muted mt-1">Giới tính: {{ $user->gender }}</div>
                     <div class="navi mt-2">
@@ -331,6 +335,10 @@ License: You must have a valid license purchased only from themeforest(the above
             "font-family": "Poppins"
         };
     </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <!--end::Global Config-->
     <!--begin::Global Theme Bundle(used by all pages)-->
     <script src="{{ asset('admin/assets/plugins/global/plugins.bundle.js') }}"></script>
@@ -347,6 +355,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin/assets/js/pages/features/charts/apexcharts.js') }}"></script>
     <!--end::Page Scripts-->
+
+
 </body>
 <!--end::Body-->
 

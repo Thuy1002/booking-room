@@ -24,20 +24,22 @@
                                         style="background-image: url('{{ asset('client/images/room-3.jpg') }}');"></div>
                                 </div>
                             </div>
+                            <h2 style="color: black;font-weight:600;">Price: $ {{ number_format($room->price) }}/ Day</h2>
                         </div>
                         <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
                             <p>{{ $room->description }}</p>
                             <div class="d-md-flex mt-5 mb-5">
                                 <ul class="list">
-                                    <li><span>Max:</span> {{ $room->capacity }} người</li>
-                                    <li><span>Size:</span> {{ $room->size }} m2</li>
+                                    <li style="color: black;font-weight:600;"><span>Max:</span> {{ $room->capacity }} người
+                                    </li>
+                                    <li style="color: black;font-weight:600;"><span>Size:</span> {{ $room->size }} m2</li>
                                 </ul>
                                 <ul class="list ml-md-5">
-                                    <li><span>View:</span> {{ $room->view }}</li>
-                                    <li><span>Floor:</span> {{ $room->floor }}</li>
+                                    <li style="color: black;font-weight:600;"><span>View:</span> {{ $room->view }}</li>
+                                    <li style="color: black;font-weight:600;"><span>Floor:</span> {{ $room->floor }}</li>
                                 </ul>
                             </div>
-
+                            <p>{{ $room->imagfacilitiese }}</p>
                             <div class="row">
                                 @if ($room->services && count($room->services) > 0)
                                     @foreach ($room->services as $item)
@@ -79,14 +81,7 @@
                     </div>
                 </div> <!-- .col-md-8 -->
                 <div class="col-lg-4 sidebar ftco-animate">
-                    <div class="sidebar-box">
-                        <form action="#" class="search-form">
-                            <div class="form-group">
-                                <span class="icon fa fa-search"></span>
-                                <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                            </div>
-                        </form>
-                    </div>
+
                     <div class="sidebar-box ftco-animate">
                         <div class="room-booking">
                             <h3>Your Reservation</h3>
@@ -107,11 +102,11 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="guest">Guests:</label>
                                     <input type="number" disabled class="form-control" name="guests"
                                         value="{{ $room->capacity }}" id="guests">
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="guest">Adults:</label>
                                     <input type="number" class="form-control" name="adults" id="adults">
@@ -121,11 +116,11 @@
                                     <input type="number" class="form-control" name="children" id="children">
                                 </div>
                                 <div class="form-group">
-                                    <div class="sidebar-box ftco-animate">
-                                        <h3>If you add more services?</h3>
-                                        <div class="tagcloud">
-                                            <a href="#" class="tag-cloud-link">dish</a>
-                                        </div>
+                                    <h3>If you add more services?</h3>
+                                    <div class="tagcloud">
+                                        @foreach ($serice as $item)
+                                            <a href="#" class="tag-cloud-link">{{ $item->title }}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -174,64 +169,65 @@
     </section> <!-- .section -->
 
     <section class="container">
-            <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
-                <h4 class="mb-4">Review &amp; Ratings</h4>
-                <div class="rd-reviews">
-                    <div class="container">
-                        @if ($room->comments && count($room->comments) > 0)
-                            @foreach ($room->comments as $item)
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="ri-pic">
-                                            <img style="height: 70px; width: 50%; border-radius: 35px;"
-                                                src="{{ asset('client/images/menu-1.jpg') }}" alt="">
-                                           
-                                        </div>
+        <div class="col-md-12 properties-single ftco-animate mb-5 mt-4">
+            <h4 class="mb-4">Review &amp; Ratings</h4>
+            <div class="rd-reviews">
+                <div class="container">
+                    @if ($room->comments && count($room->comments) > 0)
+                        @foreach ($room->comments as $item)
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="ri-pic">
+                                        <img style="height: 70px; width: 50%; border-radius: 35px;"
+                                            src="{{ asset('client/images/menu-1.jpg') }}" alt="">
+
                                     </div>
-                                    <div class="col-md-10">
-                                        <div class="ri-text">
-                                            <h5>{{ $item->user->name }}</h5>
-                                            <p>{{ Illuminate\Support\Str::limit($item->content, 100) }}</p>
-                                            <span>{{ $item->created_at }}</span>
-                                            <div class="star">
-                                                
-                                                @for ($i = 0; $i < 5; $i++)
-                                                    @if ($i <= $item->rate)
-                                                        <a href="#"><i style="color: red"
-                                                                class="icon-heart color-danger"></i></a> </a>
-                                                    @else
-                                                        <a href="#"><i class="icon-heart color-danger"></i></a>
-                                                    @endif
-                                                @endfor
-                                            </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="ri-text">
+                                        <h5>{{ $item->user->name }}</h5>
+                                        <p>{{ Illuminate\Support\Str::limit($item->content, 100) }}</p>
+                                        <span>{{ $item->created_at }}</span>
+                                        <div class="star">
+
+                                            @for ($i = 0; $i < 5; $i++)
+                                                @if ($i <= $item->rate)
+                                                    <a href="#"><i style="color: red"
+                                                            class="icon-heart color-danger"></i></a> </a>
+                                                @else
+                                                    <a href="#"><i class="icon-heart color-danger"></i></a>
+                                                @endif
+                                            @endfor
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                            @endforeach
-                        @endif
-                    </div>
-
+                            </div>
+                            <hr>
+                        @endforeach
+                    @endif
                 </div>
-                <div class="review-add">
-                    <h4>Add Review</h4>
+
+            </div>
+            <div class="review-add">
+                <h4>Add Review</h4>
+                @if (!Auth::user())
                     <form action="#" class="ra-form">
                         <div class="row">
-                            @if (!Auth::user())
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name*">
-                                    </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name*">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email*">
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email*">
                                 </div>
-                            @endif
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <h6>Your Rating:</h6>
+                                    <h6>Your Rating: </h6>
                                     <div class="rating">
                                         <i class="icon_star"></i>
                                         <i class="icon_star"></i>
@@ -251,39 +247,141 @@
                             </div>
                         </div>
                     </form>
-                </div>
-
-            </div>
-            <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
-                <h4 class="mb-4">Available Room</h4>
-                <div class="row">
-                    @foreach ($ty_roo as $item)
-                        <div class="col-sm col-md-4 ftco-animate">
-                            <div class="room">
-                                <a href="{{ route('rooms.detail', $item->id) }}" class="img img-2 d-flex justify-content-center align-items-center"
-                                    style="background-image: url('{{ asset('client/images/room-1.jpg') }}');">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3 text-center">
-                                    <h3 class="mb-3"><a href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                    <p><span class="price mr-2">$ {{ number_format($item->price) }}</span> <span
-                                            class="per">per
-                                            night</span>
-                                    </p>
-                                    <hr>
-                                    <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
-                                            class="btn-custom">View Room
-                                            Details <span class="icon-long-arrow-right"></span></a></p>
+                @endif
+                {{-- <form action="{{route('rooms.comment',$room->id)}}" method="POST" class="ra-form">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h6>Your Rating:</h6>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Review" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Submit Now</button>
+                        </div>
+                    </div>
+                </form> --}}
 
+             {{-- start   đang sửa commnet thêm trái tim --}}
+                {{-- <form action="{{ route('rooms.comment', $room->id) }}" method="POST" class="ra-form">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              @if (Auth::user())
+                              <h6>Your Rating: <span style="font-weight:600; font-size:18px;color:black; ">
+                                {{ Auth::user()->name }}</span></h6>
+                              @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" name="review" placeholder="Your Review" rows="4" required></textarea>
+                            </div>
+                            <div class="rating btn-group" data-toggle="buttons">
+                                <input type="radio" id="star5" name="rating" value="5" class="d-none">
+                                <label style="border:none; border-radius: 0px;" for="star5"
+                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
+                                        class="icon-heart color-danger"></i></label>
 
-                </div>
+                                <input type="radio" id="star4" name="rating" value="4" class="d-none">
+                                <label style="border:none; border-radius: 0px;" for="star4"
+                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
+                                        class="icon-heart color-danger"></i></label>
+
+                                <input type="radio" id="star3" name="rating" value="3" class="d-none">
+                                <label style="border:none; border-radius: 0px;" for="star3"
+                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
+                                        class="icon-heart color-danger"></i></label>
+
+                                <input type="radio" id="star2" name="rating" value="2" class="d-none">
+                                <label style="border:none; border-radius: 0px;" for="star2"
+                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
+                                        class="icon-heart color-danger"></i></label>
+
+                                <input type="radio" id="star1" name="rating" value="1" class="d-none">
+                                <label style="border:none; border-radius: 0px;" for="star1"
+                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
+                                        class="icon-heart color-danger"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Submit Now</button>
+                        </div>
+                    </div>
+                </form> --}}
+         {{-- /**END START --}}
             </div>
-      
+
+        </div>
+        <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
+            <h4 class="mb-4">Available Room</h4>
+            <div class="row">
+                @foreach ($ty_roo as $item)
+                    <div class="col-sm col-md-4 ftco-animate">
+                        <div class="room">
+                            <a href="{{ route('rooms.detail', $item->id) }}"
+                                class="img img-2 d-flex justify-content-center align-items-center"
+                                style="background-image: url('{{ asset('client/images/room-1.jpg') }}');">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="icon-search2"></span>
+                                </div>
+                            </a>
+                            <div class="text p-3 text-center">
+                                <h3 class="mb-3"><a
+                                        href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
+                                <p><span class="price mr-2">$ {{ number_format($item->price) }}</span> <span
+                                        class="per">per
+                                        night</span>
+                                </p>
+                                <hr>
+                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
+                                        class="btn-custom">View Room
+                                        Details <span class="icon-long-arrow-right"></span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+
     </section>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stars = document.querySelectorAll('.rating input[type="radio"]');
+        const ratingContainer = document.querySelector('.rating');
+
+        stars.forEach(star => {
+            star.addEventListener('change', (event) => {
+                resetStars();
+                const selectedStar = event.target;
+                const selectedStarIndex = Array.from(stars).indexOf(selectedStar);
+
+                for (let i = 0; i <= selectedStarIndex; i++) {
+                    ratingContainer.children[i].classList.add('active');
+                }
+            });
+        });
+
+        function resetStars() {
+            ratingContainer.querySelectorAll('.btn').forEach(star => {
+                star.classList.remove('active');
+            });
+        }
+    });
+</script>
