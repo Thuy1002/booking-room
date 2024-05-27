@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('booking')->name('booking.')->middleware('check-user')->controller(BookingController::class)->group( function(){
     Route::get('','index')->name('list');
-    Route::get('/paid','paid')->name('paid');
     Route::post('/{id}','addcart')->name('addcart');
+    Route::get('update-status-payment/{id}','updateSttPayment')->name('update');
+   
 });
 
 

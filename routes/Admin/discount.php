@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/discount')->name('admin.discount.')->middleware('check-admin')->controller(DiscountController::class)->group( function(){
+Route::prefix('/admin/discount')->name('admin.discount.')->middleware(['check-user','check-admin'])->controller(DiscountController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');

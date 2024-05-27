@@ -15,11 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::prefix('/admin')->name('admin.')->middleware('check-admin')->controller(HomeController::class)->group( function(){
-
-    Route::get('home','incomeReport')->name('home');
-    Route::get('/get-income-data', 'getIncomeData')->name('getIncomeData');
-
+Route::prefix('/admin')->name('admin.')->middleware(['check-user','check-admin'])->controller(HomeController::class)->group( function(){
+    Route::get('home','index')->name('home');
 });
 
 

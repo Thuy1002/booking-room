@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('payment')->name('payment.')->middleware('check-user')->controller(PaymentController::class)->group( function(){
-    Route::get('','index')->name('choice_pay');
-    Route::post('vnpay_payment','payment')->name('vnpay');
+Route::prefix('payment')->name('payment.')->middleware('check-user')->controller(PaymentController::class)->group(function () {
+    Route::get('', 'pay')->name('pay2'); //đã sửa lại bên view chekcout của booking
+    Route::post('vnpay_payment', 'payment')->name('vnpay');
+    Route::get('vnp-return', 'vnpayReturn')->name('vnpay_return');
 });
-
-

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/rooms')->name('admin.rooms.')->middleware('check-admin')->controller(RoomController::class)->group( function(){
+Route::prefix('/admin/rooms')->name('admin.rooms.')->middleware(['check-user','check-admin'])->controller(RoomController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');

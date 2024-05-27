@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/posts')->name('admin.posts.')->middleware('check-admin')->controller(BlogController::class)->group( function(){
+Route::prefix('/admin/posts')->name('admin.posts.')->middleware(['check-user','check-admin'])->controller(BlogController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');

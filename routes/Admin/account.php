@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/account')->name('admin.account.')->middleware('check-admin')->controller(AccountController::class)->group( function(){
-    Route::get('about','index')->name('about');
-    Route::post('changepro','changepro')->name('change');
-    Route::match(['get', 'post'],'changepass', 'updatePass')->name('pass_new');
+Route::prefix('/admin/account')->name('admin.account.')->middleware(['check-user', 'check-admin'])->controller(AccountController::class)->group(function () {
+    Route::get('about', 'index')->name('about');
+    Route::post('changepro', 'changepro')->name('change');
+    Route::match(['get', 'post'], 'changepass', 'updatePass')->name('pass_new');
 });
-

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/service')->name('admin.service.')->middleware('check-admin')->controller(ServiceController::class)->group( function(){
+Route::prefix('/admin/service')->name('admin.service.')->middleware(['check-user','check-admin'])->controller(ServiceController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');

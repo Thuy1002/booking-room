@@ -1,7 +1,5 @@
-
 <?php
 
-use App\Http\Controllers\Client\CommentController;
 use App\Http\Controllers\Client\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('rooms')->name('rooms.')->controller(CommentController::class)->group( function(){
-  
-   Route::post('comment/{rooms_id}','store')->name('comment');
+Route::prefix('rooms')->name('rooms.')->controller(RoomController::class)->group( function(){
+    Route::get('','index')->name('list');
+    Route::get('/{id}','detail')->name('detail');
+    Route::post('slect-type','slect')->name('slect');
+   
 });
 
 

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/admin/categori')->name('admin.categori.')->middleware('check-admin')->controller(CateServiceController::class)->group( function(){
+Route::prefix('/admin/categori')->name('admin.categori.')->middleware(['check-user','check-admin'])->controller(CateServiceController::class)->group( function(){
      Route::get('list','index')->name('list');
      Route::get('add','add')->name('add');
      Route::get('fillstt','')->name('fillersStt');
