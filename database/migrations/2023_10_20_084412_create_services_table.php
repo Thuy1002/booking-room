@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->integer('room_id')->nullable();
+            $table->integer('rooms_id')->nullable();
             $table->integer('categori_service_id');
             $table->string('title');
             $table->string('duration')->nullable();  // mô tả thời lượng dịch vụ
             $table->integer('price')->nullable();
-            $table->integer('status')->default(1);
+            $table->string('status')->default('success');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

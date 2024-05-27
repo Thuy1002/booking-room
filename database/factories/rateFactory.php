@@ -21,7 +21,7 @@ class rateFactory extends Factory
         return [
             //
             'user_id' => rand(1, 5),
-            'room_id' => rand(1, 5),
+            'rooms_id' => rand(1, 5),
             'rating' => rand(1, 5),
             'comment' => fake()->text(50),
         ];

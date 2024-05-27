@@ -19,7 +19,7 @@ class commentFactory extends Factory
     {
         return [
             //
-         //   'room_id'=>rand(1,10),
+         //   'rooms_id'=>rand(1,10),
             'user_id' =>rand(1,5),
             'parent_id'  =>rand(1,5),
             'content' =>fake()->text(1000),

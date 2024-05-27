@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'password' => Hash::make(123456), // 12345678
             'remember_token' => Str::random(10),
             'status' => Arr::random([1,2]),
-            'role' => Arr::random([1,2]),
+            'role' => 'user',
             'about_me' => fake()->text(100),
             'address' => 'hà nội',
             'gender' => Arr::random(['Nam', 'Nữ']),

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rate', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('room_id');
+            $table->integer('rooms_id');
             $table->timestamps();
             $table->string('comment')->nullable();
             $table->integer('rating');
