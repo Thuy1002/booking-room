@@ -9,16 +9,16 @@ class booking extends Model
 {
     use HasFactory;
     protected $table = 'booking';
-    protected $fillable = ['room_id', 'service_id', 'user_id', 'booking_date', 'check_in_date', 'check_out_date', 'adults', 'status', 'payment_status', 'children', 'total_price', 'description'];
+    protected $fillable = ['rooms_id', 'service_id', 'user_id', 'booking_date', 'check_in_date', 'check_out_date', 'adults', 'status', 'payment_status', 'children', 'total_price', 'description'];
 
 
     public function room()
     {
-        return $this->belongsTo(rooms::class);
+        return $this->belongsTo(rooms::class, 'rooms_id');
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function bills()
