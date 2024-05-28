@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'thuy1002dangthanh@gmail.com',
                 'password' => Hash::make(123456),
                 'image' => '',
-                'role' => 1,//admin
+                'role' => 'admin',//admin
                 'status' => 1, // chưa nghĩ ra
                 'number_phone' => '0143456781',
                 'about_me' => fake()->text(100),
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'dangthanhthuy022002@gmail.com',
                 'password' => Hash::make(123456),
                 'image' => '',
-                'role' => 2,//client
+                'role' => 'user',//client
                 'status' => 1, // chưa nghĩ ra
                 'number_phone' => '0123456781',
                 'about_me' => fake()->text(100),
@@ -45,4 +45,5 @@ class UsersTableSeeder extends Seeder
         ];
         DB::table('users')->insert($users);
     }
+    //php artisan db:seed --class=UsersTableSeeder
 }

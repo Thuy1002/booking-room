@@ -9,6 +9,6 @@ class table_comment extends Model
 {
     use HasFactory;
     protected $table = 'table_comment';
-    protected $fillable = ['id','room_id','blog_id'];
+    protected $fillable = ['id','rooms_id','blog_id'];
 }
 
