@@ -16,7 +16,7 @@ class CheckClient
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == 1) {
+        if (auth()->user()->role == 'admin') {
             return redirect()->back()->with('failed', 'Bạn không có quyền truy cập');
         }
         

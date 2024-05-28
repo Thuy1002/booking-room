@@ -16,8 +16,8 @@ class Checkadmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role == 2) {
-            return redirect()->back()->with('failed', 'Bạn không có quyền truy cập');
+        if (auth()->user()->role == 'user') {
+            return redirect(route('auth.login'))->with('failed', 'Bạn không có quyền truy cập');
         }
         return $next($request);
     }
