@@ -49,6 +49,10 @@
     <link rel="stylesheet" href="{{ asset('client/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
 
+    {{-- comment --}}
+    <link rel="stylesheet" href="{{ asset('client/rating/sty.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <style>
     /* .swal2-icon.swal2-success.swal2-icon-show {
