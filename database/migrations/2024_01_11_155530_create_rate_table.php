@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('rooms_id');
             $table->timestamps();
             $table->string('comment')->nullable();
-            $table->integer('rating');
-           $table->integer('is_approved')->default(1); // is_approved: là đã được kiểm duyệt đánh giá hay chưa | mặc định là 1 thĩ được duyệt
+            $table->string('rating')->nullable();
+           $table->integer('status')->default('hiden'); // ẩn hoặc hiện rating
         });
     }
 
