@@ -1,8 +1,37 @@
 @extends('layout.Client.master')
 @section('title')
-    DELUXE
+    AUGUSTINE
 @endsection
 @section('content')
+<style>
+    .room {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ribbon {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        position: absolute;
+        top: -64px;
+        right: -63px;
+    }
+
+    .ribbon span {
+        position: absolute;
+        display: block;
+        width: 215px;
+        padding: 10px 0;
+        background-color:#bb620ab5;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        transform: rotate(45deg);
+        transform-origin: top left;
+    }
+</style>
     <section class="ftco-booking">
         <div class="container">
             <div class="row">
@@ -94,7 +123,7 @@
                 <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
                     <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
                         <div class="ml-md-0">
-                            <span class="subheading">Welcome to Deluxe Hotel</span>
+                            <span class="subheading">Welcome to AUGUSTINE Hotel</span>
                             <h2 class="mb-4">Welcome To Our Hotel</h2>
                         </div>
                     </div>
@@ -191,21 +220,28 @@
             <div class="row">
                 @foreach ($room as $item)
                     <div class="col-sm col-md-6 col-lg-4 ftco-animate">
-                        <div class="room">
+                        <div class="room position-relative">
                             <a href="{{ route('rooms.detail', $item->id) }}"
                                 class="img d-flex justify-content-center align-items-center"
                                 style="background-image:url('{{ asset('client/images/room-1.jpg') }}');">
                                 <div class="icon d-flex justify-content-center align-items-center">
                                     <span class="icon-search2"></span>
                                 </div>
+                                @if ($item->status == 'occupied')
+                                    <div class="ribbon">
+                                        <span>Occupied</span>
+                                    </div>
+                                @endif
                             </a>
                             <div class="text p-3 text-center">
-                                <h3 class="mb-3"><a href="rooms.html">{{ $item->title }}</a></h3>
+                                <h3 class="mb-3"><a
+                                        href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
                                 <p><span class="price mr-2">{{ number_format($item->price) }} $</span> <span
                                         class="per">per night</span></p>
                                 <hr>
-                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}" class="btn-custom">View
-                                        Room Details <span class="icon-long-arrow-right"></span></a></p>
+                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
+                                        class="btn-custom">View Room Details <span
+                                            class="icon-long-arrow-right"></span></a></p>
                             </div>
                         </div>
                     </div>
@@ -274,10 +310,10 @@
                                             <div class="media-body">
                                                 <p>{{ Str::limit($item->content, 150) }}</p>
                                                 <a href="#">
-                                                    <h4 class="sec_h4">{{$item->user->name}}</h4>
+                                                    <h4 class="sec_h4">{{ $item->user->name }}</h4>
                                                 </a>
                                                 <div class="star">
-                                                    @for ($i = 1; $i <= 5 ; $i++)
+                                                    @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $item->rate)
                                                             <a href="#"><i style="color: red"
                                                                     class="icon-heart color-danger"></i></a> </a>
@@ -382,7 +418,4 @@
         </div>
     </section>
 @endsection
-<script>
-
-    
-</script>
+<script></script>

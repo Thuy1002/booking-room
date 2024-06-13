@@ -173,8 +173,8 @@
             <h4 class="mb-4">Review &amp; Ratings</h4>
             <div class="rd-reviews">
                 <div class="container">
-                    @if ($room->comments && count($room->comments) > 0)
-                        @foreach ($room->comments as $item)
+                    @if ($room->rating && count($room->rating) > 0)
+                        @foreach ($room->rating as $item)
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="ri-pic">
@@ -186,12 +186,12 @@
                                 <div class="col-md-10">
                                     <div class="ri-text">
                                         <h5>{{ $item->user->name }}</h5>
-                                        <p>{{ Illuminate\Support\Str::limit($item->content, 100) }}</p>
+                                        <p>{{ Illuminate\Support\Str::limit($item->comment, 100) }}</p>
                                         <span>{{ $item->created_at }}</span>
                                         <div class="star">
 
                                             @for ($i = 0; $i < 5; $i++)
-                                                @if ($i <= $item->rate)
+                                                @if ($i <= $item->rating)
                                                     <a href="#"><i style="color: red"
                                                             class="icon-heart color-danger"></i></a> </a>
                                                 @else
@@ -248,83 +248,39 @@
                         </div>
                     </form>
                 @endif
-                {{-- <form action="{{route('rooms.comment',$room->id)}}" method="POST" class="ra-form">
+           
+                {{-- moi --}}
+
+                <form action="{{ route('rate.', $room->id) }}" method="POST" class="ra-form">
                     @csrf
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <h6>Your Rating:</h6>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
+                                <label for="content">Description</label>
+                                <textarea id="content" name="comment" class="form-control" rows="4" required></textarea>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Review" rows="4"></textarea>
+                        <div class="col-md-6">
+                            <div class="form-group col-md-5">
+                                <label for="select-option">Select Option</label>
+                                <select id="select-option" name="rating" class="form-control" required>
+                                    <option name=""disabled selected>Feeling</option>
+                                    <option value="good">Tốt</option>
+                                    <option value="average">Tạm được</option>
+                                    <option value="excellent">Tuyệt vời</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit Now</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                            </div>
                         </div>
                     </div>
-                </form> --}}
+                </form>
 
-             {{-- start   đang sửa commnet thêm trái tim --}}
-                {{-- <form action="{{ route('rooms.comment', $room->id) }}" method="POST" class="ra-form">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                              @if (Auth::user())
-                              <h6>Your Rating: <span style="font-weight:600; font-size:18px;color:black; ">
-                                {{ Auth::user()->name }}</span></h6>
-                              @endif
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea class="form-control" name="review" placeholder="Your Review" rows="4" required></textarea>
-                            </div>
-                            <div class="rating btn-group" data-toggle="buttons">
-                                <input type="radio" id="star5" name="rating" value="5" class="d-none">
-                                <label style="border:none; border-radius: 0px;" for="star5"
-                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
-                                        class="icon-heart color-danger"></i></label>
 
-                                <input type="radio" id="star4" name="rating" value="4" class="d-none">
-                                <label style="border:none; border-radius: 0px;" for="star4"
-                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
-                                        class="icon-heart color-danger"></i></label>
 
-                                <input type="radio" id="star3" name="rating" value="3" class="d-none">
-                                <label style="border:none; border-radius: 0px;" for="star3"
-                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
-                                        class="icon-heart color-danger"></i></label>
-
-                                <input type="radio" id="star2" name="rating" value="2" class="d-none">
-                                <label style="border:none; border-radius: 0px;" for="star2"
-                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
-                                        class="icon-heart color-danger"></i></label>
-
-                                <input type="radio" id="star1" name="rating" value="1" class="d-none">
-                                <label style="border:none; border-radius: 0px;" for="star1"
-                                    class="btn btn-outline-danger"><i style="color: rgb(245, 50, 50)"
-                                        class="icon-heart color-danger"></i></label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Submit Now</button>
-                        </div>
-                    </div>
-                </form> --}}
-         {{-- /**END START --}}
+                {{-- end moi --}}
             </div>
-
         </div>
         <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
             <h4 class="mb-4">Available Room</h4>
@@ -360,28 +316,6 @@
         </div>
 
     </section>
+
+
 @endsection
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const stars = document.querySelectorAll('.rating input[type="radio"]');
-        const ratingContainer = document.querySelector('.rating');
-
-        stars.forEach(star => {
-            star.addEventListener('change', (event) => {
-                resetStars();
-                const selectedStar = event.target;
-                const selectedStarIndex = Array.from(stars).indexOf(selectedStar);
-
-                for (let i = 0; i <= selectedStarIndex; i++) {
-                    ratingContainer.children[i].classList.add('active');
-                }
-            });
-        });
-
-        function resetStars() {
-            ratingContainer.querySelectorAll('.btn').forEach(star => {
-                star.classList.remove('active');
-            });
-        }
-    });
-</script>

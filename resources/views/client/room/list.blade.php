@@ -3,6 +3,35 @@
     Rooms
 @endsection
 @section('content')
+    <style>
+        .room {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ribbon {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+            top: -64px;
+            right: -63px;
+        }
+
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 215px;
+            padding: 10px 0;
+            background-color:#bb620ab5;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(45deg);
+            transform-origin: top left;
+        }
+    </style>
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row">
@@ -10,23 +39,23 @@
                     <div id="list-product" class="row">
                         @foreach ($room as $item)
                             <div class="col-sm col-md-6 col-lg-4 ftco-animate">
-                                <div class="room">
+                                <div class="room position-relative">
                                     <a href="{{ route('rooms.detail', $item->id) }}"
                                         class="img d-flex justify-content-center align-items-center"
-                                        style="background-image: url('{{ asset('client/images/room-1.jpg') }}'); @if ($item->status == 'occupied') border: 1px solid red; @endif">
+                                        style="background-image: url('{{ asset('client/images/room-1.jpg') }}');">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
+                                        @if ($item->status == 'occupied')
+                                            <div class="ribbon">
+                                                <span>Occupied</span>
+                                            </div>
+                                        @endif
                                     </a>
                                     <div class="text p-3 text-center">
                                         <h3 class="mb-3"><a
                                                 href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                        <p><span class="price mr-2">{{ number_format($item->price) }} $</span> <span
-                                                class="per">
-                                                @if ($item->status == 'occupied')
-                                                    out of room
-                                                @endif
-                                            </span></p>
+                                        <p><span class="price mr-2">{{ number_format($item->price) }} $</span>
                                         <ul class="list">
                                             <li><span>Max:</span> {{ $item->capacity }}</li>
                                             <li><span>Size:</span> {{ $item->size }} m2</li>
@@ -182,7 +211,7 @@
                         filteredItemsDiv.empty();
                         // $.each(data, function(item) { không dùng each troang ajax
                         data.forEach(item => {
-                            console.log("cái này là mảng:",item);
+                            console.log("cái này là mảng:", item);
                             // filteredItemsDiv.html(data.html);
                             var roomHtml = `   
                              <div class="col-sm col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">
