@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Mail\ThankYou;
 use App\Models\booking;
 use App\Models\Payment;
 use App\Models\rooms;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPSTORM_META\type;
 
@@ -58,9 +60,10 @@ class BookingController extends Controller
 
     public function addcart(Request $request, $id)
     {
+        $today = Carbon::now();
         $checkInDate = Carbon::parse($request->check_in_date);
         $checkoutDate = Carbon::parse($request->check_out_date);
-        $user = Auth::id(); // Lấy ID người dùng hiện tại
+        $user = Auth::user(); // Lấy ID người dùng hiện tại
 
         // Tìm phòng theo ID
         $room = rooms::find($id);
@@ -90,7 +93,7 @@ class BookingController extends Controller
 
                     // Thêm booking vào cơ sở dữ liệu
                     DB::table('booking')->insert([
-                        'user_id' => $user,
+                        'user_id' => $user->id,
                         'rooms_id' => $room->id,
                         'check_in_date' => $request->check_in_date,
                         'check_out_date' => $request->check_out_date,
@@ -105,7 +108,7 @@ class BookingController extends Controller
                     // Cập nhật trạng thái phòng
                     $room->status = 'occupied';
                     $room->save();
-
+                    Mail::to($user->email)->send(new ThankYou($today,$days,$user, $room, $totalPrice, $checkInDate, $checkoutDate));
                     return redirect()->back()->with('success', 'Đặt phòng thành công');
                 } else {
                     return redirect()->back()->with('failed', 'Quá số lượng người ở');
@@ -117,5 +120,4 @@ class BookingController extends Controller
             return redirect()->back()->with('failed', 'Ngày check-in phải là hôm nay hoặc sau hôm nay');
         }
     }
-
 }

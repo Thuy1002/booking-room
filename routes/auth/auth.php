@@ -25,5 +25,5 @@ Route::prefix('/')->name('auth.')->controller(AuthController::class)->group(func
     Route::get('login', 'index')->name('login');
     Route::get('logout', 'logout')->name('logout');
     Route::post('handel', 'handleLogin')->name('handleLogin');
-    Route::match(['get', 'post'], 'register', 'register')->name('register');
+    Route::match(['get', 'post'], 'singup', 'singup')->name('singup');
 });
