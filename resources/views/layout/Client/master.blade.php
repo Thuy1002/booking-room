@@ -66,12 +66,12 @@
 
 <body>
     @include('_alert')
-    @if (session()->has('success'))
+    {{-- @if (session()->has('success'))
         <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
     @endif
     @if (session()->has('error'))
         <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
-    @endif
+    @endif --}}
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         @include('layout.Client.header')

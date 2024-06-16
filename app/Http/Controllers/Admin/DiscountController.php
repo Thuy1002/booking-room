@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
+use App\Models\User;
+use App\Notifications\DiscountCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class DiscountController extends Controller
 {
@@ -35,19 +39,30 @@ class DiscountController extends Controller
     return response()->json(['success' => 'Cập nhật trạng thái thành công']);
   }
 
+
   public function store(Request $request)
   {
     $req = $request->only([
       'code', 'start_date', 'amount', 'end_date', 'description'
     ]);
-    $currentDate = now(); //lấy thời gian hiện tại
-    // dd($currentDate);
-    if ($req['start_date'] >= $currentDate) {
-      if ($req['end_date'] >= $req['start_date']) {
-        Discount::create($req);
+
+    $currentDate = Carbon::now(); // Lấy thời gian hiện tại
+
+    // Chuyển đổi ngày sang đối tượng Carbon (nếu cần kiểm tra hoặc định dạng)
+    $startDate = Carbon::parse($req['start_date']);
+    $endDate = Carbon::parse($req['end_date']);
+
+    if ($startDate->greaterThanOrEqualTo($currentDate)) {
+      if ($endDate->greaterThanOrEqualTo($startDate)) {
+        $discount = Discount::create($req);
+     
+        // Gửi thông báo
+        $user = User::where('role', 'user')->get(); // Lấy người dùng hiện tại
+        Notification::send($user, new DiscountCreated($discount));
+
         return redirect()->route('admin.discount.list')->with('success', 'Thêm mới thành công');
       } else {
-        return redirect()->back()->with('failed', 'Ngày kết thúc phải lơn hơn hoặc bằng ngày bắt đầu');
+        return redirect()->back()->with('failed', 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu');
       }
     } else {
       return redirect()->back()->with('failed', 'Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại');
@@ -62,10 +77,12 @@ class DiscountController extends Controller
       $req = $request->only([
         'code', 'start_date', 'end_date', 'amount', 'description'
       ]);
-      $currentDate = now(); //lấy thời gian hiện tại
-      // dd($currentDate);
-      if ($req['start_date'] >= $currentDate) {
-        if ($req['end_date'] >= $req['start_date']) {
+      $currentDate = Carbon::now();
+      $start_date = Carbon::parse($req['start_date']);
+      $end_date = Carbon::parse($req['end_date']);
+      //  dd($start_date,$end_date,$currentDate);
+      if ($start_date >= $currentDate) {
+        if ($end_date >= $start_date) {
           $discount->update($req);
           return redirect()->route('admin.discount.list')->with('success', 'sửa dịch vụ thành công');
         } else {
