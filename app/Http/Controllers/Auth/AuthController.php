@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Wellcome;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
@@ -64,12 +66,7 @@ class AuthController extends Controller
                         ],
                     )
                 );
-                //   dd( $user);
-                // $db = User::where('email', 'like', $request->email)->first();
-                // Mail::send('screens.email.user.actived-user', compact('db', 'password'), function ($email) use ($db) {
-                //     $email->subject('Đăng ký tài khoản Eduport');
-                //     $email->to($db->email, $db->name);
-                // });
+                Mail::to($user->email)->send(new Wellcome($user));
                 return redirect()->route('auth.login')->with('success', 'Tạo tài khoản thành công');
             }
         }
