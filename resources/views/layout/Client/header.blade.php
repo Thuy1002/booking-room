@@ -19,49 +19,57 @@
         margin-bottom: 5px;
     }
 
-
-    .custom-notification-item {
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .custom-dropdown-menu {
         padding: 10px;
-        border-bottom: 1px solid #ddd;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        margin-bottom: 5px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .custom-notification-item:last-child {
+    .notification-item {
+        border-bottom: 1px solid #eaeaea;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .notification-item:last-child {
         border-bottom: none;
     }
 
-    .custom-notification-title {
-        white-space: normal;
+    .notification-content {
+        margin-left: 10px;
     }
 
-    .custom-discount-code {
-        color: #007bff;
+    .notification-title {
+        font-size: 16px;
         font-weight: bold;
-        margin-bottom: 5px;
+        color: #007bff;
     }
 
-    .custom-description,
-    .custom-start-date,
-    .custom-end-date {
+    .discount-code {
+        display: block;
+        font-size: 14px;
         margin-top: 5px;
-        color: #555;
     }
 
-    .custom-no-notifications {
+    .description,
+    .start-date,
+    .end-date {
+        margin: 3px 0;
+        color: #555;
+        font-size: 13px;
+    }
+
+    .no-notifications {
         display: block;
         padding: 10px;
         text-align: center;
-        color: #007bff;
+        color: #555;
         text-decoration: none;
     }
 
-    .custom-no-notifications:hover {
-        background-color: #f0f0f0;
+    .no-notifications:hover {
+        text-decoration: underline;
     }
 </style>
 <div style="display:flex;" class="container">
@@ -95,37 +103,32 @@
                 </li>
                 <li class="nav-item dropdown">
                     <div class="dropdown">
-                        <button style="margin-top: 10px;"  class="btn btn-secondary dropdown-toggle" type="button" id="notificationDropdown"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button style="margin-top: 10px;" class="btn btn-secondary dropdown-toggle" type="button"
+                            id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Thông báo
                             <span class="badge badge-light">{{ auth()->user()->unreadNotifications->count() }}</span>
                         </button>
-                        <div style="width:600px;" class="dropdown-menu custom-dropdown-menu" aria-labelledby="notificationDropdown">
+                        <div style="width: 400px;" class="dropdown-menu custom-dropdown-menu"
+                            aria-labelledby="notificationDropdown">
                             @forelse(auth()->user()->unreadNotifications as $notification)
                                 @if ($notification->type === 'App\Notifications\DiscountCreated')
-                                    <div class="custom-notification-item">
-                                        <div class="custom-notification-title">
-                                            Bạn có mã giảm giá sắp tới từ AUGUSTINE:
-                                        </div>
-                                        <div class="custom-discount-code">
-                                            Mã giảm giá: {{ $notification->data['discount_code'] }}
-                                        </div>
-                                        <div class="custom-description">
-                                            Mô tả: {{ $notification->data['description'] }}
-                                        </div>
-                                        <div class="custom-start-date">
-                                            Ngày bắt đầu: {{ $notification->data['start'] }}
-                                        </div>
-                                        <div class="custom-end-date">
-                                            Ngày kết thúc: {{ $notification->data['end'] }}
+                                    <div class="notification-item">
+                                        <div class="notification-content">
+                                            <span class="notification-title">AUGUSTINE</span>
+                                            <span class="discount-code">Mã giảm giá:
+                                                <strong>{{ $notification->data['discount_code'] }}</strong></span>
+                                            <p class="description">Mô tả: {{ $notification->data['description'] }}</p>
+                                            <p class="start-date">Ngày bắt đầu: {{ $notification->data['start'] }}</p>
+                                            <p class="end-date">Ngày kết thúc: {{ $notification->data['end'] }}</p>
                                         </div>
                                     </div>
                                 @endif
                             @empty
-                                <a class="custom-no-notifications" href="#">Không có thông báo mới</a>
+                                <a class="no-notifications" href="#">Không có thông báo mới</a>
                             @endforelse
                         </div>
                     </div>
+
 
 
 
