@@ -22,12 +22,12 @@ class rooms extends Model
 
     public function booking()
     {
-        return $this->hasMany(booking::class, 'rooms_service');
+        return $this->hasMany(booking::class);
     }
 
-    public function comments()
+    public function rating()
     {
-        return $this->belongsToMany(comment::class, 'table_comment');
+        return $this->hasMany(Rate::class,);
     }
 
     public function discounts(){
