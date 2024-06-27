@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('total_price')->nullable();
             //$table->integer('total_price_curr')->nullable();
             $table->text('description')->nullable();
+            $table->date('check_out_date_reminder')->nullable();
             $table->timestamps();
         });
     }
