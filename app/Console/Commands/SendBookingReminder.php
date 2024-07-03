@@ -40,3 +40,5 @@ class SendBookingReminder extends Command
         $this->info('Reminder emails sent successfully!');
     }
 }
+//php artisan send:booking-reminder
+// chạy câu lệnh để check hạn chả phòng của người dùng
