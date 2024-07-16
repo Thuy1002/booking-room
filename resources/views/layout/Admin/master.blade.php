@@ -1,26 +1,15 @@
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Bootstrap 4 HTML, React, Angular 10 & VueJS Admin Dashboard Theme
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://1.envato.market/EA4JP
-Renew Support: https://1.envato.market/EA4JP
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!--begin::Head-->
 
 <head>
     <base href="../../">
     <meta charset="utf-8" />
     <title>@yield('title')</title>
-    <meta name="description" content="Aside light theme example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
+    {{-- tinyMC --}}
+    <x-head.tinymce-config/>
     {{-- chart --}}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     {{-- end chart --}}
@@ -44,7 +33,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{ asset('admin/assets/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
     <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
-
     <style>
         .swal2-icon.swal2-success.swal2-icon-show {
             margin: auto;
@@ -58,12 +46,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--end::Head-->
 <!--begin::Body-->
 @include('_alert')
-@if (session()->has('success'))
-    <div class="alert alert-success text-center">{{ session()->get('success') }}</div>
-@endif
-@if (session()->has('error'))
-    <div class="alert alert-danger text-center">{{ session()->get('error') }}</div>
-@endif
 
 <body id="kt_body"
     class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">

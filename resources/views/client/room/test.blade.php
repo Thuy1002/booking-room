@@ -18,12 +18,6 @@
             right: -63px;
         }
 
-        .test-room {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
         .ribbon span {
             position: absolute;
             display: block;
@@ -41,40 +35,10 @@
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row">
-                <div id="list-product" class="col-lg-9">
-                    <div class="row">
+                <div class="col-lg-9">
+                    <div id="list-product" class="row">
                         @foreach ($room as $item)
-                            <div class="col-sm col-md-6 col-lg-4 ftco-animate">
-                                <div class="room position-relative">
-                                    <a href="{{ route('rooms.detail', $item->id) }}"
-                                        class="img d-flex justify-content-center align-items-center"
-                                        style="background-image: url('{{ asset('client/images/room-1.jpg') }}');">
-                                        <div class="icon d-flex justify-content-center align-items-center">
-                                            <span class="icon-search2"></span>
-                                        </div>
-                                        @if ($item->status == 'occupied')
-                                            <div class="ribbon">
-                                                <span>Occupied</span>
-                                            </div>
-                                        @endif
-                                    </a>
-                                    <div class="text p-3 text-center">
-                                        <h3 class="mb-3"><a
-                                                href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                        <p><span class="price mr-2">{{ number_format($item->price) }} $</span>
-                                        <ul class="list">
-                                            <li><span>Max:</span> {{ $item->capacity }}</li>
-                                            <li><span>Size:</span> {{ $item->size }} m2</li>
-                                            <li><span>View:</span> {{ $item->view }}</li>
-                                            <li><span>floor:</span> {{ $item->floor }}</li>
-                                        </ul>
-                                        <hr>
-                                        <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
-                                                class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('client.room.room-type', ['items' => [$item]])
                         @endforeach
                     </div>
                 </div>
@@ -85,8 +49,9 @@
                             <div class="fields">
                                 <div class="form-group">
                                     <div class="select-wrap one-third">
-                                        <div style="font-size: 20px;margin-top:16px;margin-right:70px;" class="icon"><span
-                                                class="ion-ios-arrow-down"></span></div>
+                                        <div style="font-size: 20px;margin-top:16px;margin-right:70px;" class="icon">
+                                            <span class="ion-ios-arrow-down"></span>
+                                        </div>
                                         <label for="select-type">Loại phòng:</label>
                                         <select name="type" id="select-type" class="form-control">
                                             @foreach ($type as $item)
@@ -95,7 +60,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="select-wrap one-third">
                                         <input class="form-control" type="number" name="" id=""
@@ -175,7 +139,7 @@
         $(document).ready(function() {
             $('#select-type').on('change', function() {
                 var selectedType = $(this).val();
-                console.log("lấy id:", selectedType);
+                console.log("Selected ID:", selectedType);
                 $.ajax({
                     url: '{{ route('rooms.select') }}',
                     type: 'POST',
@@ -185,15 +149,13 @@
                     },
                     success: function(response) {
                         if (response.status) {
-                            console.log("res is ", response.html);
                             $('#list-product').html(response.html);
                         } else {
-                            alert(response.message); // Hiển thị thông báo lỗi
+                            alert(response.message);
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Lỗi AJAX:', textStatus, errorThrown);
-                        // Xử lý lỗi phù hợp (ví dụ: hiển thị thông báo lỗi cho người dùng)
+                        console.error('AJAX Error:', textStatus, errorThrown);
                     }
                 });
             });

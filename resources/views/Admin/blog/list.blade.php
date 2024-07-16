@@ -89,7 +89,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="" class="btn btn-primary font-weight-bolder">
+                    <a href="{{route('admin.posts.add')}}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -227,10 +227,10 @@
                                         data-url="{{ route('admin.posts.change', $item->id) }}"
                                         data-id="{{ $item->id }}" title="Trạng Thái" data-style="btn-success"
                                         tabindex="null">
-                                        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}
-                                            data-product-value="1">Hiện</option>
-                                        <option value="2" {{ $item->status == 2 ? 'selected' : '' }}
-                                            data-product-value="2">Ẩn</option>
+                                        <option value="public" {{ $item->status == 'public' ? 'selected' : '' }}
+                                            data-product-value="public">Hiện</option>
+                                        <option value="private" {{ $item->status == 'private'? 'selected' : '' }}
+                                            data-product-value="private">Ẩn</option>
                                     </select>
                                 </div>
                                 <!--end::Label-->

@@ -193,7 +193,7 @@
                             <td colspan="3"></td>
                             <td class="text-right align-middle font-weight-bold">Total:</td>
                             <td class="text-center align-middle font-weight-bold">
-                                {{ number_format($total, 3) }} <!-- $total là tổng tiền bạn tính toán -->
+                                {{ number_format($total) }} <!-- $total là tổng tiền bạn tính toán -->
                             </td>
                         </tr>
                         <!-- Nút "Check Out" -->

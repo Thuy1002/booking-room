@@ -282,7 +282,7 @@
                 {{-- end moi --}}
             </div>
         </div>
-        <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
+        {{-- <div class="col-md-12 room-single ftco-animate mb-5 mt-5">
             <h4 class="mb-4">Available Room</h4>
             <div class="row">
                 @foreach ($ty_roo as $item)
@@ -313,7 +313,7 @@
 
 
             </div>
-        </div>
+        </div> --}}
 
     </section>
 

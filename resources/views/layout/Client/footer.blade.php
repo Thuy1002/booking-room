@@ -2,9 +2,8 @@
     <div class="row mb-5">
         <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">AUGUSTINE Hotel</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind texts.</p>
+                <h2 class="ftco-heading-2">AUGUSTINE</h2>
+                <p>Sứ mệnh cao cả, nơi phồn hoa thịnh vượng, giấc mộng của vua chúa, nơi xứng đáng để hưởng thụ. Nơi sự bắt đầu của cái đẹp và sự thư giãn</p>
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                     <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -14,10 +13,10 @@
         </div>
         <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-                <h2 class="ftco-heading-2">Useful Links</h2>
+                <h2 class="ftco-heading-2">Liên kết</h2>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">Blog</a></li>
-                    <li><a href="#" class="py-2 d-block">Rooms</a></li>
+                    <li><a href="#" class="py-2 d-block">Bài Viết</a></li>
+                    <li><a href="#" class="py-2 d-block">Phòng</a></li>
                     <li><a href="#" class="py-2 d-block">Amenities</a></li>
                     <li><a href="#" class="py-2 d-block">Gift Card</a></li>
                 </ul>
@@ -36,7 +35,7 @@
         </div>
         <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">Have a Questions?</h2>
+                <h2 class="ftco-heading-2">Liên hệ ?</h2>
                 <div class="block-23 mb-3">
                     <ul>
                         <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.

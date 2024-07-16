@@ -3,35 +3,35 @@
     AUGUSTINE
 @endsection
 @section('content')
-<style>
-    .room {
-        position: relative;
-        overflow: hidden;
-    }
+    <style>
+        .room {
+            position: relative;
+            overflow: hidden;
+        }
 
-    .ribbon {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        position: absolute;
-        top: -64px;
-        right: -63px;
-    }
+        .ribbon {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+            top: -64px;
+            right: -63px;
+        }
 
-    .ribbon span {
-        position: absolute;
-        display: block;
-        width: 215px;
-        padding: 10px 0;
-        background-color:#bb620ab5;
-        color: #fff;
-        font-size: 14px;
-        font-weight: bold;
-        text-align: center;
-        transform: rotate(45deg);
-        transform-origin: top left;
-    }
-</style>
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 215px;
+            padding: 10px 0;
+            background-color: #bb620ab5;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(45deg);
+            transform-origin: top left;
+        }
+    </style>
     <section class="ftco-booking">
         <div class="container">
             <div class="row">
@@ -59,7 +59,7 @@
                             <div class="col-md d-flex">
                                 <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                                     <div class="wrap">
-                                        <label for="#">Type Room</label>
+                                        <label for="#">Loại Phòng</label>
                                         <div class="form-field">
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -69,26 +69,6 @@
                                                     @endforeach
 
 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md d-flex">
-                                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
-                                    <div class="wrap">
-                                        <label for="#">Customer</label>
-                                        <div class="form-field">
-                                            <div class="select-wrap">
-                                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">1 Adult</option>
-                                                    <option value="">2 Adult</option>
-                                                    <option value="">3 Adult</option>
-                                                    <option value="">4 Adult</option>
-                                                    <option value="">5 Adult</option>
-                                                    <option value="">6 Adult</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -128,16 +108,14 @@
                         </div>
                     </div>
                     <div class="pb-md-5">
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-                            would have been rewritten a thousand times and everything that was left from its origin
-                            would be the word "and" and the Little Blind Text should turn around and return to its own,
-                            safe country. But nothing the copy said could convince her and so it didn’t take long until
-                            a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged
-                            her into their agency, where they abused her for their.</p>
-                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the
-                            skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of
-                            her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she
-                            continued her way.</p>
+                        <p>Augustine là một điểm đến lý tưởng cho những ai tìm kiếm sự kết hợp hoàn hảo giữa sự thoải mái và
+                            tiện nghi. Với không gian trang nhã và dịch vụ tận tâm, chúng tôi cam kết mang đến cho khách
+                            hàng những trải nghiệm đặc biệt và không gian lưu trú ấm áp. Tọa lạc tại những vị trí đắc địa,
+                            Augustine không chỉ mang lại sự thuận tiện trong việc di chuyển mà còn là nơi bạn có thể tận
+                            hưởng cuộc sống và khám phá những nét đẹp địa phương. Với đội ngũ nhân viên chuyên nghiệp và
+                            nhiệt tình, chúng tôi luôn sẵn sàng đáp ứng mọi nhu cầu của quý khách, từ khi đặt phòng đến khi
+                            trải nghiệm tại Augustine. Hãy đến và cảm nhận sự khác biệt tại Augustine ngay hôm nay!</p>
+                        <p>ĐỈNH CAO CỦA CÁI ĐẸP, CHÚA TỂ CỦA SỰ THƯ GIÃN</p>
                         <ul class="ftco-social d-flex">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -162,8 +140,8 @@
                             </div>
                         </div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">25/7 Front Desk</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Lễ tân 25/7</h3>
+                            <p>Một con sông nhỏ tên là Duden chảy ngang qua nơi ở và nguồn cung cấp của họ.</p>
                         </div>
                     </div>
                 </div>
@@ -175,8 +153,9 @@
                             </div>
                         </div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Restaurant Bar</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Đồ ăn</h3>
+                            <p>Da dạng, mỹ vị nhân gian, thứ đồ ăn tiến vua, mọi thứ đều hoàn hảo, ăn và cảm nhận thiên
+                                đường không phải là không tồn tại</p>
                         </div>
                     </div>
                 </div>
@@ -188,8 +167,9 @@
                             </div>
                         </div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Transfer Services</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Dịch vụ</h3>
+                            <p>Take care tận chân răng kẽ tóc của khách hàng. Khách hàng đối với chúng tôi là vua chúa,
+                                thượng đế !</p>
                         </div>
                     </div>
                 </div>
@@ -201,8 +181,9 @@
                             </div>
                         </div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Spa Suites</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Spa</h3>
+                            <p>Đỉnh cao cửa sự thư giãn, chúa tể của làm đẹp, bà hoàng của mọi mỹ phẩm mang tên AUGUSTINE
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -214,7 +195,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section text-center ftco-animate">
-                    <h2 class="mb-4">Our Rooms</h2>
+                    <h2 class="mb-4">Được ưa chuộng</h2>
                 </div>
             </div>
             <div class="row">
@@ -236,12 +217,11 @@
                             <div class="text p-3 text-center">
                                 <h3 class="mb-3"><a
                                         href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                <p><span class="price mr-2">{{ number_format($item->price) }} $</span> <span
-                                        class="per">per night</span></p>
+                                <p><span class="price mr-2">{{ number_format($item->price) }} VNĐ</span> <span
+                                        class="per">1 ngày</span></p>
                                 <hr>
-                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
-                                        class="btn-custom">View Room Details <span
-                                            class="icon-long-arrow-right"></span></a></p>
+                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}" class="btn-custom">Chi
+                                        tiết <span class="icon-long-arrow-right"></span></a></p>
                             </div>
                         </div>
                     </div>
@@ -260,7 +240,7 @@
                             <div class="block-18 text-center">
                                 <div class="text">
                                     <strong class="number" data-number="50000">0</strong>
-                                    <span>Happy Guests</span>
+                                    <span>Chào mừng các thượng đế !</span>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +248,7 @@
                             <div class="block-18 text-center">
                                 <div class="text">
                                     <strong class="number" data-number="3000">0</strong>
-                                    <span>Rooms</span>
+                                    <span>Phòng</span>
                                 </div>
                             </div>
                         </div>
@@ -276,7 +256,7 @@
                             <div class="block-18 text-center">
                                 <div class="text">
                                     <strong class="number" data-number="1000">0</strong>
-                                    <span>Staffs</span>
+                                    <span>Nhân viên</span>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +264,7 @@
                             <div class="block-18 text-center">
                                 <div class="text">
                                     <strong class="number" data-number="100">0</strong>
-                                    <span>Destination</span>
+                                    <span>Điểm đến</span>
                                 </div>
                             </div>
                         </div>
@@ -339,7 +319,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3">
                 <div class="col-md-7 heading-section text-center ftco-animate">
-                    <h2>Recent Blog</h2>
+                    <h2>Bài viết nổi bật</h2>
                 </div>
             </div>
             <div class="row d-flex">
