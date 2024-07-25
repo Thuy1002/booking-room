@@ -48,30 +48,29 @@ class RoomController extends Controller
         ]);
         $roo['image'] = $img;
         $room =  rooms::create($roo);
-        $room_id = $room->id;
+        $rooms_id = $room->id;
         foreach ($request->file('description_img') as $immm) {
             $img = new TableImages();
-            $img->rooms_id =  $room_id;
+            $img->rooms_id =  $rooms_id;
             $img->image_name =  $immm->getClientOriginalName(); //láy tên ảnh
             $img->image_path = $immm->store('images', 'public');
             $img->save();
         };
         // dd($img);
 
-        $room->services()->attach($selectedServices);
+        $room->services()->attach($selectedServices); // dùng trong quan hệ n-n Khi dùng attach sẽ có 1 bảng trung gian và dùng nó để lưu 2 dầu dữ liệu từ 2 bảng vào bảng trung gian
 
         return redirect()->route('admin.rooms.list')->with('success', 'thêm mới thành công');
     }
     public function update(Request $request, $id)
     {
-        $type = type::all();
+        $type = Type::all();
         $user = Auth::user();
-        $servi = service::all();
+        $servi = Service::all();
+
         if ($request->isMethod('post')) {
             $roo = rooms::find($id);
-            $img = $request->file('image')->store('images', 'public'); // Lưu vào thư mục "storage/app/public/images";
-            //  $img_des = $request->file('description_img')->store('images', 'public');
-            $selectedServices = $request->input('service_id');
+
             $update = $request->only([
                 'title',
                 'floor',
@@ -82,23 +81,42 @@ class RoomController extends Controller
                 'price',
                 'description',
             ]);
-            $update['image'] = $img;
-            foreach ($request->file('description_img') as $immm) {
-                $img = new TableImages();
-                $img->rooms_id =$roo->id;
-                $img->image_name =  $immm->getClientOriginalName(); //láy tên ảnh
-                $img->image_path = $immm->store('images', 'public');
-                $img->save();
-            };
+
+            // Kiểm tra và cập nhật ảnh chính nếu có
+            if ($request->hasFile('image')) {
+                $img = $request->file('image')->store('images', 'public');
+                $update['image'] = $img;
+            } else {
+                $update['image'] = $roo->image; // Giữ nguyên ảnh cũ nếu không có ảnh mới
+            }
+
+            // Kiểm tra và cập nhật ảnh mô tả nếu có
+            if ($request->hasFile('description_img')) {
+                foreach ($request->file('description_img') as $immm) {
+                    $img = new TableImages();
+                    $img->rooms_id = $roo->id;
+                    $img->image_name = $immm->getClientOriginalName(); // Lấy tên ảnh
+                    $img->image_path = $immm->store('images', 'public');
+                    $img->save();
+                }
+            }
+
+            // Cập nhật các trường thông tin
             $roo->update($update);
-            $roo->services()->sync($selectedServices);
+
+            // Cập nhật dịch vụ (quan hệ nhiều-nhiều)
+            if ($request->has('service_id')) {
+                $selectedServices = $request->input('service_id');
+                $roo->services()->sync($selectedServices);
+            }
+
             return redirect()->route('admin.rooms.list')->with('success', 'Sửa thành công');
         } else {
-            $roo = rooms::with(['type', 'services','images'])->find($id);
-            //   dd($roo->refresh());
+            $roo = rooms::with(['type', 'services', 'images'])->find($id);
             return view('Admin.rooms.update', compact('user', 'roo', 'type', 'servi'));
         }
     }
+
     public function updateStatus(Request $request, $id)
     {
         $item = rooms::find($id);
