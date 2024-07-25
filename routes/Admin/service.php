@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/admin/service')->name('admin.service.')->middleware(['check-user','check-admin'])->controller(ServiceController::class)->group( function(){
-     Route::get('list','index')->name('list');
-     Route::get('add','add')->name('add');
+     Route::get('service-list','index')->name('list');
+     Route::get('create-service','add')->name('add');
      Route::get('fillstt','fillersStt')->name('fillersStt');
      Route::post('store','store')->name('store');
      Route::post('change/{id}','updateStatus')->name('change');
-     Route::match( ['get', 'post'], 'update/{id}','update')->name('update');
+     Route::match( ['get', 'post'], 'service-editing/{id}','update')->name('update');
      Route::get('delete/{id}','delet')->name('delete');
 });
 

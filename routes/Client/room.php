@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('rooms')->name('rooms.')->controller(RoomController::class)->group( function(){
     Route::get('','index')->name('list');
     Route::get('/{id}','detail')->name('detail');
-    Route::post('slect-type','searchType')->name('slect');
+    Route::post('select-type','filterRoom')->name('select');
    
 });
 

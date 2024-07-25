@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/admin/categori')->name('admin.categori.')->middleware(['check-user','check-admin'])->controller(CateServiceController::class)->group( function(){
-     Route::get('list','index')->name('list');
-     Route::get('add','add')->name('add');
+     Route::get('types-of-services','index')->name('list');
+     Route::get('types-of-services/create','add')->name('add');
      Route::get('fillstt','')->name('fillersStt');
      Route::post('store','store')->name('store');
      Route::post('change/{id}','Changestt')->name('change');
-     Route::match( ['get', 'post'], 'update/{id}','update')->name('update');
+     Route::match( ['get', 'post'], 'types-of-services/edit/{id}','update')->name('update');
      Route::get('delete/{id}','delet')->name('delete');
 });
 

@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\DB;
 
 
 Route::prefix('admin/statistics')->name('admin.statistics.')->middleware(['check-user', 'check-admin'])->controller(StatisticsController::class)->group(function () {
-    Route::get('users', 'user')->name('user');
+    Route::get('manage-user-lists', 'user')->name('user');
     Route::get('delete-user/{id}', 'deleUser')->name('deleUser');
-    Route::get('rooms', 'rooms')->name('rooms');
-    Route::get('income', 'income')->name('income');
+    Route::get('room-list-statistics', 'rooms')->name('rooms');
+    Route::get('income-statistics', 'income')->name('income');
    
 });
