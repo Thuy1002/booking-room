@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Mail\ThankYou;
 use App\Models\booking;
+use App\Models\Booking_server;
 use App\Models\Payment;
 use App\Models\rooms;
+use App\Models\service;
 use App\Models\type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -88,15 +90,30 @@ class BookingController extends Controller
             if ($checkoutDate > $checkInDate) {
                 if (($request->adults + $request->children) <= $room->capacity) {
                     // Tính số ngày và tổng tiền
-                    $days = $checkInDate->diffInDays($checkoutDate);
+                    $days = $checkInDate->diffInDays($checkoutDate); //diffInDays: tính số ngày chênh lệch 
                     $totalPrice = $days * $room->price;
 
+                    // Tính tổng giá dịch vụ
+                    $serviceTotalPrice = 0;
+                    if ($request->has('services')) {
+                        $services = service::whereIn('id', $request->services)->get();
+                        foreach ($services as $service) {
+                            $serviceTotalPrice += $service->price;
+                        }
+                    }
+                    // Tổng tiền bao gồm cả giá phòng và giá dịch vụ
+                    $totalPrice += $serviceTotalPrice;
+
+                    // Tính ngày nhắc nhở (một ngày trước ngày trả phòng)
+                    $reminderDate = $checkoutDate->subDay()->toDateString();
+
                     // Thêm booking vào cơ sở dữ liệu
-                    DB::table('booking')->insert([
+                    $bookingId = DB::table('booking')->insertGetId([
                         'user_id' => $user->id,
                         'rooms_id' => $room->id,
                         'check_in_date' => $request->check_in_date,
                         'check_out_date' => $request->check_out_date,
+                        'check_out_date_reminder' => $reminderDate,
                         'adults' => $request->adults,
                         'children' => $request->children,
                         'description' => $request->description,
@@ -105,10 +122,15 @@ class BookingController extends Controller
                         'payment_status' => 'unpaid',
                     ]);
 
+                    // Thêm các dịch vụ vào bảng pivot
+                    if ($request->has('services')) {
+                        $booking = Booking::find($bookingId);
+                        $booking->services()->attach($request->services);
+                    }
                     // Cập nhật trạng thái phòng
                     $room->status = 'occupied';
                     $room->save();
-                    Mail::to($user->email)->send(new ThankYou($today,$days,$user, $room, $totalPrice, $checkInDate, $checkoutDate));
+                    Mail::to($user->email)->send(new ThankYou($today, $days, $user, $room, $totalPrice, $checkInDate, $checkoutDate));
                     return redirect()->back()->with('success', 'Đặt phòng thành công');
                 } else {
                     return redirect()->back()->with('failed', 'Quá số lượng người ở');
