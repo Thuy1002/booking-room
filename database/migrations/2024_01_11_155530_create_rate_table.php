@@ -19,8 +19,10 @@ return new class extends Migration
             $table->integer('rooms_id');
             $table->timestamps();
             $table->string('comment')->nullable();
-            $table->string('rating')->nullable();
-           $table->integer('status')->default('hiden'); // ẩn hoặc hiện rating
+            $table->integer('service')->nullable();
+            $table->integer('view')->nullable();
+            $table->integer('quality')->nullable(); // chất lượng
+           $table->string('status')->default('hiden'); // ẩn hoặc hiện rating
         });
     }
 
