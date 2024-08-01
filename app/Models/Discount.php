@@ -9,7 +9,7 @@ class Discount extends Model
 {
     use HasFactory;
     protected $table = 'discount';
-    protected $fillable = ['code', 'description', 'status', 'amount', 'start_date', 'end_date'];
+    protected $fillable = ['room_id','title','code', 'description', 'status', 'amount', 'start_date', 'end_date'];
 
     public function room()
     {

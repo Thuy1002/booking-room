@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
+use App\Models\rooms;
 use App\Models\User;
 use App\Notifications\DiscountCreated;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class DiscountController extends Controller
   public function add()
   {
     $user = Auth::user();
-    return view('Admin.discount.add', compact('user'));
+    $room = rooms::all();
+    return view('Admin.discount.add', compact('user','room'));
   }
   public function Changestt($id)
   {
@@ -43,7 +45,7 @@ class DiscountController extends Controller
   public function store(Request $request)
   {
     $req = $request->only([
-      'code', 'start_date', 'amount', 'end_date', 'description'
+      'title','code', 'start_date', 'amount', 'end_date', 'description'
     ]);
 
     $currentDate = Carbon::now(); // Lấy thời gian hiện tại
@@ -55,7 +57,14 @@ class DiscountController extends Controller
     if ($startDate->greaterThanOrEqualTo($currentDate)) {
       if ($endDate->greaterThanOrEqualTo($startDate)) {
         $discount = Discount::create($req);
-     
+          $room = rooms::whereIn('id',$request->room_id)->get(); //chọn các phòng để áp dụng khuyến mại
+          foreach($room as $item){
+            $priceOld  = $item->price * $discount->amount/100;
+           $pricePromotional =  $item->price-$priceOld;
+           $item ->promotional_price  =  $pricePromotional;
+           $item ->save();
+          }
+        //  dd($room);
         // Gửi thông báo
         $user = User::where('role', 'user')->get(); // Lấy người dùng hiện tại
         Notification::send($user, new DiscountCreated($discount));
@@ -75,7 +84,7 @@ class DiscountController extends Controller
     $discount = Discount::find($id);
     if ($request->isMethod('POST')) {
       $req = $request->only([
-        'code', 'start_date', 'end_date', 'amount', 'description'
+       'title', 'code', 'start_date', 'end_date', 'amount', 'description'
       ]);
       $currentDate = Carbon::now();
       $start_date = Carbon::parse($req['start_date']);
