@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Mô tả</label>
-                    <textarea name="description" class="form-control form-control-solid" rows="3"></textarea>
+                    <textarea name="description" id="tinymce-editor" class="form-control form-control-solid" rows="3"></textarea>
                 </div>
                 <div class="form-group d-flex">
                     <div style="height: 40px;" class="input-group-append">

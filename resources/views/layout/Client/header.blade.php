@@ -82,11 +82,11 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="{{ route('client') }}" class="nav-link">Trang Chủ</a></li>
-            <li class="nav-item"><a href="{{ route('rooms.list') }}" class="nav-link">Phòng</a></li>
-            <li class="nav-item"><a href="restaurant.html" class="nav-link">Nhà Hàng</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">Sứ Mệnh</a></li>
-            <li class="nav-item"><a href="{{ route('blog.list-blog') }}" class="nav-link">Bài Viết</a></li>
+            <li class="nav-item active"><a href="{{ route('client') }}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{{ route('rooms.list') }}" class="nav-link">Rooms</a></li>
+            <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
+            {{-- <li class="nav-item"><a href="about.html" class="nav-link">Sứ Mệnh</a></li> --}}
+            <li class="nav-item"><a href="{{ route('blog.list-blog') }}" class="nav-link">Blogs</a></li>
             @if (Auth::user())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
@@ -96,9 +96,9 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a style="color: #4a86ef;font-weight:600;" class="dropdown-item" href="#">Tài khoản</a>
                         <a style="color: #4a86ef;font-weight:600;" class="dropdown-item"
-                            href="{{ route('booking.list') }}">Phòng</a>
+                            href="{{ route('booking.list') }}">My Rooms</a>
                         <a style="font-weight:600;" class="dropdown-item text-danger"
-                            href="{{ route('auth.logout') }}">Đăng xuất</a>
+                            href="{{ route('auth.logout') }}">Log Out</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -115,16 +115,16 @@
                                     <div class="notification-item">
                                         <div class="notification-content">
                                             <span class="notification-title">AUGUSTINE</span>
-                                            <span class="discount-code">Mã giảm giá:
+                                            <span class="discount-code">Discount:
                                                 <strong>{{ $notification->data['discount_code'] }}</strong></span>
-                                            <p class="description">Mô tả: {{ $notification->data['description'] }}</p>
-                                            <p class="start-date">Ngày bắt đầu: {{ $notification->data['start'] }}</p>
-                                            <p class="end-date">Ngày kết thúc: {{ $notification->data['end'] }}</p>
+                                            <p class="description">Description: {{ $notification->data['description'] }}</p>
+                                            <p class="start-date">start date: {{ $notification->data['start'] }}</p>
+                                            <p class="end-date">end date: {{ $notification->data['end'] }}</p>
                                         </div>
                                     </div>
                                 @endif
                             @empty
-                                <a class="no-notifications" href="#">Không có thông báo mới</a>
+                                <a class="no-notifications" href="#">There are no new notifications !!!</a>
                             @endforelse
                         </div>
                     </div>

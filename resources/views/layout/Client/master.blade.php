@@ -24,7 +24,7 @@
     <link href="{{ asset('admin/assets/css/themes/layout/brand/light.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/assets/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/logo.jpg') }}" />
     {{-- admin --}}
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">

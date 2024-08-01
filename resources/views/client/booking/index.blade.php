@@ -92,6 +92,7 @@
                                                 <th>Room</th>
                                                 <th class="text-center">Check in</th>
                                                 <th class="text-center">Check out</th>
+                                                <th class="text-center">+ Dịch vụ</th>
                                                 <th class="text-center">Price</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -114,8 +115,22 @@
                                                         <td class="text-center align-middle">
                                                             {{ $item->check_in_date }}
                                                         </td>
+
                                                         <td class="text-center align-middle">
                                                             {{ $item->check_out_date }}
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            <div class="slect-option">
+                                                                <select
+                                                                    style="width: 100px;height: 45px; border-radius: 5px;"
+                                                                    name="status" class="slect-status">
+                                                                    @foreach ($item->services as $item2)
+                                                                        <option class="form-controll">{{ $item2->title }} -
+                                                                            {{ number_format($item2->price) }}VNĐ </option>
+                                                                    @endforeach
+
+                                                                </select>
+                                                            </div>
                                                         </td>
                                                         <td class="text-center align-middle">
                                                             {{ number_format($item->room->price) }}
@@ -123,8 +138,7 @@
                                                         <td class="text-center align-middle">
                                                             <a id="updatePay"
                                                                 data-url="{{ route('booking.update', $item->id) }}"
-                                                                data-id="{{ $item->id }}"
-                                                                class="btn btn-primary">Add</a>
+                                                                data-id="{{ $item->id }}" class="btn btn-success">Pay</a>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -138,81 +152,100 @@
                     </div>
                     <!--end::My Booking Tab-->
 
-                 <!--begin::Calculating Tab-->
-<div class="tab-pane fade" id="calculating" role="tabpanel" aria-labelledby="calculating-tab">
-    <div class="card card-custom gutter-b">
-        <!--begin::Header-->
+                    <!--begin::Calculating Tab-->
+                    <div class="tab-pane fade" id="calculating" role="tabpanel" aria-labelledby="calculating-tab">
+                        <div class="card card-custom gutter-b">
+                            <!--begin::Header-->
 
-        <!--end::Header-->
-        <div class="card-body">
-            <!--begin::Tables-->
-            <div class="table-responsive">
-                <table class="table">
-                    <!--begin::Cart Header-->
-                    <thead>
-                        <tr>
-                            <th>Room</th>
-                            <th class="text-center">Check in</th>
-                            <th class="text-center">Check out</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <!--end::Cart Header-->
-                    <tbody>
-                        <!--begin::Cart Content-->
-                        @foreach ($cartRoom as $item)
-                            @if ($item->payment_status == 'calculating')
-                                <tr>
-                                    <td class="d-flex align-items-center font-weight-bolder">
-                                        <div class="symbol symbol-60 flex-shrink-0 mr-4 bg-light">
-                                            <div class="symbol-label"
-                                                style="background-image:url('{{ asset('client/images/room-2.jpg') }}');">
-                                            </div>
-                                        </div>
-                                        <a href="#" class="text-dark text-hover-primary">{{ $item->room->title }}</a>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        {{ $item->check_in_date }}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        {{ $item->check_out_date }}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        {{ number_format($item->room->price) }}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <a id="updatePay2" data-url="{{ route('booking.update', $item->id) }}"
-                                            data-id="{{ $item->id }}" class="btn btn-primary">Remove</a>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                        <!-- Tổng tiền -->
-                        <tr>
-                            <td colspan="3"></td>
-                            <td class="text-right align-middle font-weight-bold">Total:</td>
-                            <td class="text-center align-middle font-weight-bold">
-                                {{ number_format($total) }} <!-- $total là tổng tiền bạn tính toán -->
-                            </td>
-                        </tr>
-                        <!-- Nút "Check Out" -->
-                        <tr>
-                            <td colspan="5">
-                                <div>
-                                    <a style="float: right;font-size:20px;" href="{{ route('payment.pay2') }}"
-                                        class="btn btn-secondary">Check Out</a>
+                            <!--end::Header-->
+                            <div class="card-body">
+                                <!--begin::Tables-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <!--begin::Cart Header-->
+                                        <thead>
+                                            <tr>
+                                                <th>Room</th>
+                                                <th class="text-center">Check in</th>
+                                                <th class="text-center">Check out</th>
+                                                <th class="text-center">+ Services</th>
+                                                <th class="text-center">Price</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Cart Header-->
+                                        <tbody>
+                                            <!--begin::Cart Content-->
+                                            @foreach ($cartRoom as $item)
+                                                @if ($item->payment_status == 'calculating')
+                                                    <tr>
+                                                        <td class="d-flex align-items-center font-weight-bolder">
+                                                            <div class="symbol symbol-60 flex-shrink-0 mr-4 bg-light">
+                                                                <div class="symbol-label"
+                                                                    style="background-image:url('{{ asset('client/images/room-2.jpg') }}');">
+                                                                </div>
+                                                            </div>
+                                                            <a href="#"
+                                                                class="text-dark text-hover-primary">{{ $item->room->title }}</a>
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            {{ $item->check_in_date }}
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            {{ $item->check_out_date }}
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            <div class="slect-option">
+                                                                <select
+                                                                    style="width: 100px;height: 45px; border-radius: 5px;"
+                                                                    name="status" class="slect-status">
+                                                                    @foreach ($item->services as $item2)
+                                                                        <option class="form-controll">{{ $item2->title }}
+                                                                            - {{ number_format($item2->price) }}VNĐ
+                                                                        </option>
+                                                                    @endforeach
+
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            {{ number_format($item->room->price) }}
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            <a id="updatePay2"
+                                                                data-url="{{ route('booking.update', $item->id) }}"
+                                                                data-id="{{ $item->id }}"
+                                                                class="btn btn-primary">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            <!-- Tổng tiền -->
+                                            <tr>
+                                                <td colspan="3"></td>
+                                                <td class="text-right align-middle font-weight-bold">Total:</td>
+                                                <td class="text-center align-middle font-weight-bold">
+                                                    {{ number_format($total) }} <!-- $total là tổng tiền bạn tính toán -->
+                                                </td>
+                                            </tr>
+                                            <!-- Nút "Check Out" -->
+                                            <tr>
+                                                <td colspan="5">
+                                                    <div>
+                                                        <a style="float: right;font-size:20px;"
+                                                            href="{{ route('payment.pay2') }}"
+                                                            class="btn btn-secondary">Check Out</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--end::Tables-->
-        </div>
-    </div>
-</div>
-<!--end::Calculating Tab-->
+                                <!--end::Tables-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Calculating Tab-->
 
 
 
@@ -232,6 +265,7 @@
                                                 <th>Room</th>
                                                 <th class="text-center">Check in</th>
                                                 <th class="text-center">Check out</th>
+                                                <th class="text-center">+ Services</th>
                                                 <th class="text-center">Price</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -255,6 +289,18 @@
                                                     </td>
                                                     <td class="text-center align-middle">
                                                         {{ $item->check_out_date }}
+                                                    </td>
+                                                    <td class="text-center align-middle">
+                                                        <div class="slect-option">
+                                                            <select style="width: 100px;height: 45px; border-radius: 5px;"
+                                                                name="status" class="slect-status">
+                                                                @foreach ($item->services as $item2)
+                                                                    <option class="form-controll">{{ $item2->title }} -
+                                                                        {{ number_format($item2->price) }}VNĐ </option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
                                                     </td>
                                                     <td class="text-center align-middle">
                                                         {{ number_format($item->room->price) }}

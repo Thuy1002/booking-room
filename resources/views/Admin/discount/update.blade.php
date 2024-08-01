@@ -1,12 +1,12 @@
 @extends('layout.Admin.master')
 @section('title')
-   sửa khuyến mại
+   Edit Discount
 @endsection
 @section('content')
     <div style="width: 50%;margin: auto;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
-                Thêm dịch vụ mới
+                Edit discount
             </h3>
         </div>
         <!--begin::Form-->
@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Code</label>
-                    <input type="text" name="code" value="{{$discount->code}}" class="form-control form-control-solid" placeholder="" />
+                    <label>Title</label>
+                    <input type="text" name="title" value="{{$discount->title}}" class="form-control form-control-solid" placeholder="" />
                 </div>
                 <div class="form-group">
                     <label>Phần trăm giảm</label>

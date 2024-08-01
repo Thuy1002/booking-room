@@ -1,12 +1,12 @@
 @extends('layout.Admin.master')
 @section('title')
-    Thêm mới mã khuyến mãi
+    Create Discount
 @endsection
 @section('content')
     <div style="width: 50%;margin: auto;" class="card card-custom">
         <div class="card-header">
             <h3 class="card-title">
-                Thêm dịch vụ mới
+                create discount
             </h3>
         </div>
         <!--begin::Form-->
@@ -22,29 +22,45 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Code</label>
-                    <input type="text" name="code" class="form-control form-control-solid" placeholder="" />
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control form-control-solid" placeholder="" />
                 </div>
                 <div class="form-group">
-                    <label>Phần trăm giảm</label>
+                    <label>Amount</label>
                     <input type="number" name="amount" class="form-control form-control-solid" placeholder="" />
                 </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label">Phòng được giảm giá</label>
+                    <div class="col-9 col-form-label">
+                        <div class="checkbox-inline">
+                            @foreach ($room as $item)
+                                <label for="{{ $item->id }}"
+                                    class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
+                                    <input id="{{ $item->id }}" type="checkbox" value="{{ $item->id }}"
+                                        name="room_id[]" />
+                                    <span></span>
+                                    {{ $item->title }}
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label for="exampleTextarea">Mô tả</label>
+                    <label for="exampleTextarea">Description</label>
                     <textarea name="description" class="form-control form-control-solid" rows="3"></textarea>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-10">
                         <div class="form-group row align-items-center">
                             <div class="col-md-5">
-                                <label>Ngày bắt bầu:</label>
+                                <label>Start date:</label>
                                 <div class="input-group timepicker">
                                     <input class="form-control is-valid" type="date" name="start_date" id="">
                                 </div>
                                 <div class="d-md-none mb-2"></div>
                             </div>
                             <div class="col-md-5">
-                                <label>Ngày kết thúc:</label>
+                                <label>End date:</label>
                                 <div class="input-group timepicker">
                                     <input class="form-control is-invalid" type="date" name="end_date" id="">
                                 </div>

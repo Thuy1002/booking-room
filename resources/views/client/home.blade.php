@@ -217,10 +217,20 @@
                             <div class="text p-3 text-center">
                                 <h3 class="mb-3"><a
                                         href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                <p><span class="price mr-2">{{ number_format($item->price) }} VNĐ</span> <span
-                                        class="per">1 ngày</span></p>
+                                <p>
+                                    @if ($item->promotional_price)
+                                        <span
+                                            class="text-muted text-decoration-line-through">{{ number_format($item->price) }}</span>
+                                        <span class="price mr-2">{{ number_format($item->promotional_price) }}
+                                            VNĐ</span> <span class="per">1 ngày</span>
+                                    @else
+                                        <span class="price mr-2">{{ number_format($item->price) }}
+                                            VNĐ</span> <span class="per">1 ngày</span>
+                                    @endif
+                                </p>
                                 <hr>
-                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}" class="btn-custom">Chi
+                                <p class="pt-1"><a href="{{ route('rooms.detail', $item->id) }}"
+                                        class="btn-custom">Chi
                                         tiết <span class="icon-long-arrow-right"></span></a></p>
                             </div>
                         </div>

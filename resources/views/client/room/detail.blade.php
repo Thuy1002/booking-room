@@ -24,7 +24,14 @@
                                         style="background-image: url('{{ asset('client/images/room-3.jpg') }}');"></div>
                                 </div>
                             </div>
-                            <h2 style="color: black;font-weight:600;">Price: $ {{ number_format($room->price) }}/ Day</h2>
+                            {{-- <h2 style="color: black;font-weight:600;">Price: $ {{ number_format($room->promotional_price) }}/ Day</h2> --}}
+                            @if ($room->promotional_price)
+                                <h4
+                                    class="color: black;font-weight:600; text-muted text-decoration-line-through">{{ number_format($room->promotional_price) }}VNĐ/ Day</h4>
+                                    <h2 style="color: black;font-weight:600;">Price:  {{ number_format($room->promotional_price) }}VNĐ/ Day</h2>
+                            @else
+                            <h2 style="color: black;font-weight:600;">Price:  {{ number_format($room->price) }}VNĐ/ Day</h2>
+                            @endif
                         </div>
                         <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
                             <p>{{ $room->description }}</p>
@@ -32,7 +39,8 @@
                                 <ul class="list">
                                     <li style="color: black;font-weight:600;"><span>Max:</span> {{ $room->capacity }} người
                                     </li>
-                                    <li style="color: black;font-weight:600;"><span>Size:</span> {{ $room->size }} m2</li>
+                                    <li style="color: black;font-weight:600;"><span>Size:</span> {{ $room->size }} m2
+                                    </li>
                                 </ul>
                                 <ul class="list ml-md-5">
                                     <li style="color: black;font-weight:600;"><span>View:</span> {{ $room->view }}</li>
@@ -117,11 +125,17 @@
                                 </div>
                                 <div class="form-group">
                                     <h3>If you add more services?</h3>
-                                    <div class="tagcloud">
-                                        @foreach ($serice as $item)
-                                            <a href="#" class="tag-cloud-link">{{ $item->title }}</a>
+                                    <ul class="list-group">
+                                        @foreach ($service as $service)
+                                            <li class="list-group-item">
+                                                <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                                                {{ $service->title }} - {{ number_format($service->price, 0, ',', '.') }}
+                                                VNĐ
+                                            </li>
                                         @endforeach
-                                    </div>
+                                    </ul>
+
+
                                 </div>
                                 <div class="form-group">
                                     <label for="date-out">Description:</label>
@@ -188,7 +202,7 @@
                                         <h5>{{ $item->user->name }}</h5>
                                         <p>{{ Illuminate\Support\Str::limit($item->comment, 100) }}</p>
                                         <span>{{ $item->created_at }}</span>
-                                        <div class="star">
+                                        {{-- <div class="star">
 
                                             @for ($i = 0; $i < 5; $i++)
                                                 @if ($i <= $item->rating)
@@ -198,7 +212,7 @@
                                                     <a href="#"><i class="icon-heart color-danger"></i></a>
                                                 @endif
                                             @endfor
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -248,28 +262,19 @@
                         </div>
                     </form>
                 @endif
-           
+
                 {{-- moi --}}
 
                 <form action="{{ route('rate.', $room->id) }}" method="POST" class="ra-form">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="content">Description</label>
                                 <textarea id="content" name="comment" class="form-control" rows="4" required></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group col-md-5">
-                                <label for="select-option">Select Option</label>
-                                <select id="select-option" name="rating" class="form-control" required>
-                                    <option name=""disabled selected>Feeling</option>
-                                    <option value="good">Tốt</option>
-                                    <option value="average">Tạm được</option>
-                                    <option value="excellent">Tuyệt vời</option>
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
                             </div>

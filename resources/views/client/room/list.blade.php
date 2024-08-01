@@ -61,7 +61,15 @@
                                     <div class="text p-3 text-center">
                                         <h3 class="mb-3"><a
                                                 href="{{ route('rooms.detail', $item->id) }}">{{ $item->title }}</a></h3>
-                                        <p><span class="price mr-2">{{ number_format($item->price) }} $</span>
+                                        <p>< @if ($item->promotional_price)
+                                            <span
+                                                class="text-muted text-decoration-line-through">{{ number_format($item->price) }}</span>
+                                            <span class="price mr-2">{{ number_format($item->promotional_price) }}
+                                                VNĐ</span> <span class="per">1 ngày</span>
+                                        @else
+                                            <span class="price mr-2">{{ number_format($item->price) }}
+                                                VNĐ</span> <span class="per">1 ngày</span>
+                                        @endif
                                         <ul class="list">
                                             <li><span>Max:</span> {{ $item->capacity }}</li>
                                             <li><span>Size:</span> {{ $item->size }} m2</li>
@@ -175,7 +183,7 @@
         $(document).ready(function() {
             $('#select-type').on('change', function() {
                 var selectedType = $(this).val();
-                console.log("lấy id:", selectedType);
+              //  console.log("lấy id:", selectedType);
                 $.ajax({
                     url: '{{ route('rooms.select') }}',
                     type: 'POST',
@@ -184,8 +192,9 @@
                         type: selectedType
                     },
                     success: function(response) {
+                          console.log("!!!! ", response);
                         if (response.status) {
-                            console.log("res is ", response.html);
+                            // console.log("res is ", response.html);
                             $('#list-product').html(response.html);
                         } else {
                             alert(response.message); // Hiển thị thông báo lỗi

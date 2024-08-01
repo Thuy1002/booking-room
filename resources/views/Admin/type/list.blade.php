@@ -149,7 +149,7 @@
                                                     id="kt_datatable_search_status">
                                                     <option>Chọn</option>
                                                     <option value="0">Tát cả</option>
-                                                    <option value="1">Hiện</option>
+                                                    <option value= "1">Hiện</option>
                                                     <option value="2">Ẩn</option>
                                                 </select>
                                             </div>

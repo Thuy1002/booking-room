@@ -67,46 +67,23 @@
                                 <form action="{{ route('payment.vnpay') }}" method="post" id="payment">
                                     {{-- {{ route('client.order.vnpay') }} --}}
                                     @csrf
-                                 {{--    @foreach ($bookRoom as $room)
-                                        <!-- Course item START -->
-                                        <div class="row g-3">
-                                            <!-- Image -->
-                                            <div class="col-sm-4">
-                                                <img class="rounded" src="{{ asset('app/' . $room->image) }}"
-                                                    alt="">
-                                            </div>
-                                            <!-- Info -->
-                                            <div class="col-sm-8">
-                                                <input type="hidden" name="" value="{{ $room->id }}">
-
-                                                <h6 class="mb-0"><a href="#">{{ $room->title }}</a></h6>
-                                                <!-- Info -->
-                                                <div class="d-flex align-items-center mt-3">
-                                                    <!-- Price -->
-                                                    <span class="text-success">{{ number_format($room->price) }}đ
-                                                    </span> <span class="mx-1">/</span>
-                                                    <del>{{ number_format($room->price) }}đ</del>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
-                                        <!-- Course item END -->
-                                        <hr> <!-- Divider -->
-                                        <div>
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
-                                                <span class="h6 fw-light mb-0">Tổng giá</span>
-                                                <span class="h6 fw-light mb-0 fw-bold">{{ number_format($total) }}đ
-                                                    <input type="text" hidden value="{{ $total }}" total_price>
-                                            </li>
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
-                                                <span class="h6 fw-light mb-0">Giảm được</span>
-                                                <span class="text-danger" show_disount>0% - 0đ</span>
-                                            </li>
-                                            <li class="list-group-item px-0 d-flex justify-content-between">
-                                                <span class="h5 mb-0">Kết quả</span>
-                                                <span class="h5 mb-0" total_discount>{{ number_format($total) }}đ</span>
-                                            </li>
-                                        </div>
+                                    <!-- Course item END -->
+                                    <hr> <!-- Divider -->
+                                    <div>
+                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <span class="h6 fw-light mb-0">Tổng giá</span>
+                                            <span class="h6 fw-light mb-0 fw-bold">{{ number_format($total) }}đ
+                                                <input type="text" hidden value="{{ $total }}" total_price>
+                                        </li>
+                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <span class="h6 fw-light mb-0">Giảm được</span>
+                                            <span class="text-danger" show_disount>0% - 0đ</span>
+                                        </li>
+                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <span class="h5 mb-0">Kết quả</span>
+                                            <span class="h5 mb-0" total_discount>{{ number_format($total) }}đ</span>
+                                        </li>
+                                    </div>
                                     {{-- @endforeach --}}
                             </div>
 
@@ -145,7 +122,7 @@
         </div>
     </section>
     <!-- =======================
-                                                                                                                                            Page content END -->
+                                                                                                                                                Page content END -->
 @endsection
 
 @section('js-links')

@@ -203,7 +203,7 @@
                                                 </td>
                                                 <td class="pl-0">
                                                     <div>
-                                                        <span   class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"> {{ $item->code }}</span>
+                                                        <span   class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"> {{ $item->title }}</span>
                                                          
                                                         <span
                                                             class="text-muted font-weight-bold d-block">{{ $item->amount }}%
