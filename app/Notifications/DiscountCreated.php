@@ -56,7 +56,7 @@ class DiscountCreated extends Notification
     {
         return [
             'discount_id' => $this->discount->id,
-            'discount_code' => $this->discount->code,
+            'discount_code' => $this->discount->title,
             'description' => $this->discount->description,
             'start' => $this->discount->start_date,
             'end' => $this->discount->end_date

@@ -22,8 +22,10 @@ class rateFactory extends Factory
             //
             'user_id' => rand(1, 5),
             'rooms_id' => rand(1, 5),
-            'rating' => rand(1, 5),
-            'comment' => fake()->text(50),
+           // 'rating' => rand(1, 5),
+            'service' => rand(1, 5),
+            'view' => rand(1, 5),
+            'quality' => rand(1, 5),
         ];
     }
 }

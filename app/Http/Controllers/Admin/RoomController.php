@@ -28,7 +28,6 @@ class RoomController extends Controller
         $servi = service::all();
         $user = Auth::user();
         $typ = type::all();
-        //      dd($room);
         return view('Admin.rooms.add', compact('user', 'typ', 'servi'));
     }
     public function store(Request $request)

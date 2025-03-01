@@ -91,8 +91,10 @@ class BookingController extends Controller
                 if (($request->adults + $request->children) <= $room->capacity) {
                     // Tính số ngày và tổng tiền
                     $days = $checkInDate->diffInDays($checkoutDate); //diffInDays: tính số ngày chênh lệch 
-                    $totalPrice = $days * $room->price;
 
+                    $roomPrice = $room->promotional_price ?? $room->price; // có giá khuyến mãi thì sử dụng còn ko sẽ lấy giá trị price mặc định
+
+                    $totalPrice = $days * $roomPrice;
                     // Tính tổng giá dịch vụ
                     $serviceTotalPrice = 0;
                     if ($request->has('services')) {

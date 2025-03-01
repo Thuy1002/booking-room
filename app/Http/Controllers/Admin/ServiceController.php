@@ -23,15 +23,21 @@ class ServiceController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $item = service::find($id);
-        if ($item->status == 1) {
-            $item->update(['status' => 2]);
-        } elseif ($item->status == 2) {
-            $item->update(['status' => 1]);
+        if ($item->status == 'success') {
+            $item->update(['status' => 'pending']);
+        } else {
+            $item->update(['status' => 'success']);
         }
         return response()->json(['success' => 'Cập nhật trạng thái thành công']);
     }
 
 
+    public function fillersStt(Request $request)
+    {
+        $req = $request->input('status'); //nhận requets từ thẻ input
+        $serviceFilter = service::where('status', $req)->get();
+        return response()->json($serviceFilter);
+    }
     public function add()
     {
         $user = Auth::user();
@@ -56,7 +62,7 @@ class ServiceController extends Controller
         $user = Auth::user();
         $cate = categori_service::all();
         $service = service::find($id);
-       // dd($service);
+        // dd($service);
         if ($request->isMethod('POST')) {
             $img  = $request->file('image')->store('images', 'public');
             $req = $request->only([
@@ -66,7 +72,7 @@ class ServiceController extends Controller
             $service->update($req);
             return redirect()->route('admin.service.list')->with('success', 'Sửa dịch vụ thành công');
         }
-        return view('Admin.service.update', compact('user', 'service','cate'));
+        return view('Admin.service.update', compact('user', 'service', 'cate'));
     }
 
     public function delet($id)

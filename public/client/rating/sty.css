@@ -1,0 +1,23 @@
+
+    .ra-form .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .rating-container .stars {
+        display: flex;
+        align-items: center;
+    }
+    .rating-container .stars input[type="radio"] {
+        display: none;
+    }
+    .rating-container .stars label {
+        cursor: pointer;
+        font-size: 2rem;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+    .rating-container .stars input[type="radio"]:checked ~ label,
+    .rating-container .stars label:hover,
+    .rating-container .stars label:hover ~ label {
+        color: #f39c12;
+    }
+

@@ -1,0 +1,83 @@
+
+@import url(https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/hk-grotesk.min.css);
+
+body {
+  font-size: 16px;
+  background: #f6f6f5;
+  font-family: "HK Grotesk", sans-serif;
+}
+p {
+  margin-top: 20px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+  text-align: justify;
+}
+table {
+  width: 100%;
+}
+a {
+  color: #000000;
+  font-weight: 600;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.wrapper {
+  width: 100%;
+  max-width: 567px;
+  margin: 32px auto;
+}
+.header {
+  padding: 24px 32px;
+}
+.content {
+  padding: 20px 32px;
+  background-color: #ffffff;
+}
+.footer {
+  padding: 20px 32px 24px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.footer a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+}
+a.underline {
+  text-decoration: underline;
+}
+a.call-to-action {
+  background: #64d068;
+  color: #ffffff;
+  padding: 16px 67px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600px;
+}
+.delivery-logo {
+  width: 200px;
+}
+.borderless-logo {
+  width: 75%;
+  max-width: 178px;
+}
+.social-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  text-align: right;
+}
+.social-icons td {
+  text-align: right;
+}
+.text-lg {
+  font-size: 24px;
+}
+.font-bold {
+  font-weight: 600px;
+}

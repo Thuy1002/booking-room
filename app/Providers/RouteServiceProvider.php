@@ -52,9 +52,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/auth/auth.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/Admin/type.php'));
+            // Route::middleware('web')
+            //     ->namespace($this->namespace)
+            //     ->group(base_path('routes/Admin/types.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)
@@ -71,7 +71,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/Admin/user.php'));
+                ->group(base_path('routes/Admin/type.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)
@@ -106,6 +106,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
+                ->group(base_path('routes/Client/blog.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
                 ->group(base_path('routes/Client/comment.php'));
 
             Route::middleware('web')
@@ -114,9 +118,11 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/Client/payment.php'));
+                ->group(base_path('routes/Client/rate.php'));
 
-           
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/Client/payment.php'));
         });
     }
 

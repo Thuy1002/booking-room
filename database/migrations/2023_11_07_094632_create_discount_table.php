@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('discount', function (Blueprint $table) {
             $table->id();
             $table->integer('rooms_id')->nullable();
-            $table->string('code')->unique(); // Mã giảm giá (unique)
+            $table->string('title')->default();
+            $table->string('code')->unique()->default(); // Mã giảm giá (unique)
             $table->string('image')->nullable();
             $table->string('description')->nullable(); // Mô tả (có thể null)
             $table->integer('amount'); // Giá trị giảm giá

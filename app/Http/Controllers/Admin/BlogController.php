@@ -14,6 +14,10 @@ class BlogController extends Controller
         $blog = blog::with(['user','images'])->orderBy('created_at','desc')->paginate(4);
         return view('Admin.blog.list',compact('user','blog'));
     }
+    public function add(){
+        $user = Auth::user();
+        return view('Admin.blog.add',compact('user'));
+    }
     public function updateStatus(Request $request, $id)
     {
         $item = blog::find($id);

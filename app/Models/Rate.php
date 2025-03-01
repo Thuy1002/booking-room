@@ -9,5 +9,13 @@ class Rate extends Model
 {
     use HasFactory;
     protected $table = 'rate';
-    protected $fillable = ['user_id','room_id','comment','rating'];
+    protected $fillable = ['users_id','rooms_id','comment','rating'];
+
+
+    public function room(){
+        return $this->belongsTo(rooms::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

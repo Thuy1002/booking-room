@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
-    // ['title','content','status'];
     public function index()
     {
         $user = Auth::user();

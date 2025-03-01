@@ -22,7 +22,7 @@ class blogFactory extends Factory
             'user_id' =>rand(1,5),
             'title' =>fake()->text(15),
             'content' =>fake()->text(5),
-            'status' =>Arr::random([1,2]),
+            'status' =>Arr::random(['public','private']),
         ];
     }
 }
